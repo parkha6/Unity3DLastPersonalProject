@@ -1,27 +1,27 @@
 using UnityEngine;
 
 /// <summary>
-/// ÀÎº¥Åä¸® °ü·Ã Å¬·¡½º
+/// ì¸ë²¤í† ë¦¬ ê´€ë ¨ í´ë˜ìŠ¤
 /// </summary>
 public class Inventory : MonoBehaviour
 {
     /// <summary>
-    /// ÀÎº¥Åä¸® Ç¥½Ã
+    /// ì¸ë²¤í† ë¦¬ í‘œì‹œ
     /// </summary>
     void SetActive()
     { this.gameObject.SetActive(true); }
     /// <summary>
-    /// ÀÎº¥Åä¸® ºñÇ¥½Ã
+    /// ì¸ë²¤í† ë¦¬ ë¹„í‘œì‹œ
     /// </summary>
     void SetDeActive()
     { this.gameObject.SetActive(false); }
     /// <summary>
-    /// ÀåÂø ¾ÆÀÌÅÛ
+    /// ì¥ì°© ì•„ì´í…œ
     /// </summary>
     void EquipItems()
     { }
     /// <summary>
-    /// º¸À¯ ¾ÆÀÌÅÛ
+    /// ë³´ìœ  ì•„ì´í…œ
     /// </summary>
     void HoldingItems()
     { }
@@ -30,11 +30,11 @@ public class Inventory : MonoBehaviour
 class Stage
 {
     /// <summary>
-    /// ÇöÀç ½ºÅ×ÀÌÁö
+    /// í˜„ì¬ ìŠ¤í…Œì´ì§€
     /// </summary>
     int currentStage = 1;
     /// <summary>
-    /// currentStageº¸´Ù ½ºÅ×ÀÌÁö 1»ó½Â
+    /// currentStageë³´ë‹¤ ìŠ¤í…Œì´ì§€ 1ìƒìŠ¹
     /// </summary>
     int IncreaseStage()
     { return ++currentStage; }
@@ -42,18 +42,18 @@ class Stage
 class Gold
 {
     /// <summary>
-    /// º¸À¯ °ñµå
+    /// ë³´ìœ  ê³¨ë“œ
     /// </summary>
     int gold = 0;
     /// <summary>
-    /// plusGold¸¸Å­ °ñµå °ª Áõ°¡.
+    /// plusGoldë§Œí¼ ê³¨ë“œ ê°’ ì¦ê°€.
     /// </summary>
     /// <param name="plusGold"></param>
     /// <returns></returns>
     int IncreaseGold(int plusGold)
     { return gold += plusGold; }
     /// <summary>
-    /// minusGold¸¸Å­ °ñµå °ª °¨¼Ò
+    /// minusGoldë§Œí¼ ê³¨ë“œ ê°’ ê°ì†Œ
     /// </summary>
     /// <param name="minusGold"></param>
     /// <returns></returns>
@@ -61,17 +61,17 @@ class Gold
     { return gold -= minusGold; }
 }
 /// <summary>
-/// ¸ó½ºÅÍ ¸®½ºÆ® °ü·Ã Å¬·¡½º
+/// ëª¬ìŠ¤í„° ë¦¬ìŠ¤íŠ¸ ê´€ë ¨ í´ë˜ìŠ¤
 /// </summary>
 class MonsterParty
 {
     /// <summary>
-    /// ÆÄÆ¼¾ÈÀÇ ¸ó½ºÅÍ ¼ö¸¦ ÁöÁ¤
+    /// íŒŒí‹°ì•ˆì˜ ëª¬ìŠ¤í„° ìˆ˜ë¥¼ ì§€ì •
     /// </summary>
     void ChooseAmount()
     { }
     /// <summary>
-    /// ¸ğµÎ Á×¾ú´ÂÁö Ã¼Å©
+    /// ëª¨ë‘ ì£½ì—ˆëŠ”ì§€ ì²´í¬
     /// </summary>
     void CheckAllDead()
     { }

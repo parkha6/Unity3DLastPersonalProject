@@ -1,51 +1,51 @@
 /// <summary>
-/// ½ΊΕ³ Ε¬·΅½ΊΏλ ΐΞΕΝΖδΐΜ½Ί
+/// μ¤ν‚¬ ν΄λμ¤μ© μΈν„°νμ΄μ¤
 /// </summary>
 interface Skills
 {
     /// <summary>
-    /// ½ΊΕ³Έν ΌΌΖΓΏλ
+    /// μ¤ν‚¬λª… μ„Έν…μ©
     /// </summary>
     /// <param name="setName"></param>
     /// <returns></returns>
     string SetName(string setName);
     /// <summary>
-    /// ½ΊΕ³·ΞΑχ ΌΌΖΓΏλ
+    /// μ¤ν‚¬λ΅μ§ μ„Έν…μ©
     /// </summary>
     void SkillLogic();
     /// <summary>
-    /// ΌÒΈπMpΌΌΖΓΏλ
+    /// μ†λª¨Mpμ„Έν…μ©
     /// </summary>
     /// <param name="setMp"></param>
     /// <returns></returns>
     int SetMp(int setMp);
 }
 /// <summary>
-/// ½ΊΕ³ Ε¬·΅½Ί ±ΈΗφ
+/// μ¤ν‚¬ ν΄λμ¤ κµ¬ν„
 /// </summary>
-class Skill : Skills //ΐΞΕΝΖδΐΜ½Ί΄Β ΉΉΗΟ΄Β °Ε±ζ·΅ ΖΫΊνΈ―ΐΜΎξΎί ΗΟΑφ?
+class Skill : Skills //μΈν„°νμ΄μ¤λ” λ­ν•λ” κ±°κΈΈλ νΌλΈ”λ¦­μ΄μ–΄μ•Ό ν•μ§€?
 {
     /// <summary>
-    /// ½ΊΕ³Έν
+    /// μ¤ν‚¬λª…
     /// </summary>
     string skillName;
     /// <summary>
-    /// ΌÒΈπMP
+    /// μ†λª¨MP
     /// </summary>
     int usedMp;
     /// <summary>
-    /// ½ΊΕ³Έν ΌΌΖΓΏλ
+    /// μ¤ν‚¬λª… μ„Έν…μ©
     /// </summary>
     /// <param name="setName"></param>
     /// <returns></returns>
     public string SetName(string setName)
     { return skillName = setName; }
     /// <summary>
-    /// ½ΊΕ³·ΞΑχ ΌΌΖΓΏλ
+    /// μ¤ν‚¬λ΅μ§ μ„Έν…μ©
     /// </summary>
     public void SkillLogic() { }
     /// <summary>
-    /// ΌÒΈπMpΌΌΖΓΏλ
+    /// μ†λª¨Mpμ„Έν…μ©
     /// </summary>
     /// <param name="setMp"></param>
     /// <returns></returns>

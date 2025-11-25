@@ -3,27 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ºĞ±â Ã³¸®¿ë ¸Å´ÏÀú
+/// ë¶„ê¸° ì²˜ë¦¬ìš© ë§¤ë‹ˆì €
 /// </summary>
 public class GameManager : MonoSingleton<GameManager>
 {
     /// <summary>
-    /// °ÔÀÓ ½ÃÀÛ
+    /// ê²Œì„ ì‹œì‘
     /// </summary>
     void StartGame()
     { }
     /// <summary>
-    /// ÇÃ·¹ÀÌ¾î ÅÏ
+    /// í”Œë ˆì´ì–´ í„´
     /// </summary>
     void PlayerTurn()
     { }
     /// <summary>
-    /// ¸ó½ºÅÍ ÅÏ
+    /// ëª¬ìŠ¤í„° í„´
     /// </summary>
     void MonsterTurn()
     { }
     /// <summary>
-    /// °ÔÀÓ Á¾·á
+    /// ê²Œì„ ì¢…ë£Œ
     /// </summary>
     void QuitGame()
     { }

@@ -1,22 +1,22 @@
 using UnityEngine;
 /// <summary>
-/// UIÁ¤º¸Ã¢ Ã³¸®¿ë ¸Å´ÏÀú
+/// UIì •ë³´ì°½ ì²˜ë¦¬ìš© ë§¤ë‹ˆì €
 /// </summary>
 public class UiManager : MonoSingleton<UiManager>
 {
     /// <summary>
-    /// »ç¿ëÀÚ Á¤º¸ UIÃ¢
+    /// ì‚¬ìš©ì ì •ë³´ UIì°½
     /// </summary>
-    [Tooltip("»ç¿ëÀÚ Á¤º¸ UIÃ¢")]
+    [Tooltip("ì‚¬ìš©ì ì •ë³´ UIì°½")]
     [SerializeField]
     GameObject playerInfoUi;
     /// <summary>
-    /// ÇÃ·¹ÀÌ¾î Á¤º¸Ã¢ ÄÑ±â
+    /// í”Œë ˆì´ì–´ ì •ë³´ì°½ ì¼œê¸°
     /// </summary>
     void PlayerInfo()
     { playerInfoUi.SetActive(true); }
     /// <summary>
-    /// ÇÃ·¹ÀÌ¾î Á¤º¸Ã¢ ²ô±â
+    /// í”Œë ˆì´ì–´ ì •ë³´ì°½ ë„ê¸°
     /// </summary>
     void OffPlayerInfo()
     { playerInfoUi.SetActive(false); }

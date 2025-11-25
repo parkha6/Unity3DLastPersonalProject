@@ -1,7 +1,7 @@
 using UnityEngine;
 
 /// <summary>
-/// ½Ì±ÛÅÏ ÆĞÅÏ ¹èÄ¡¿ë Å¬·¡½º
+/// ì‹±ê¸€í„´ íŒ¨í„´ ë°°ì¹˜ìš© í´ë˜ìŠ¤
 /// </summary>
 public class MonoSingleton<T> : MonoBehaviour where T : Component
 {

@@ -1,6 +1,6 @@
 using UnityEngine;
 /// <summary>
-/// ¸ÅÁ÷³Ñ¹ö¿ë Å¬·¡½º
+/// ë§¤ì§ë„˜ë²„ìš© í´ë˜ìŠ¤
 /// </summary>
 class Consts
 {

@@ -1,19 +1,19 @@
 using UnityEngine;
 /// <summary>
-/// ¸ğµç ¿ÀºêÁ§Æ®ÀÇ °øÅëº¯¼ö¸¦ °¡Áø Å¬·¡½º
+/// ëª¨ë“  ì˜¤ë¸Œì íŠ¸ì˜ ê³µí†µë³€ìˆ˜ë¥¼ ê°€ì§„ í´ë˜ìŠ¤
 /// </summary>
 public class Object : MonoBehaviour
 {
     /// <summary>
-    /// ÀÌ¸§ º¯¼ö
+    /// ì´ë¦„ ë³€ìˆ˜
     /// </summary>
-    protected string nameIs = "¾Ë ¼ö ¾øÀ½";
+    protected string nameIs = "ì•Œ ìˆ˜ ì—†ìŒ";
     /// <summary>
-    /// ·¹º§ º¯¼ö
+    /// ë ˆë²¨ ë³€ìˆ˜
     /// </summary>
     protected byte level = 0;
     /// <summary>
-    /// 255ÀÌ»ó°ú À½¼ö°ªÀ» ¸·±â À§ÇÑ ·¹º§ ÇÁ·ÎÆÛÆ¼
+    /// 255ì´ìƒê³¼ ìŒìˆ˜ê°’ì„ ë§‰ê¸° ìœ„í•œ ë ˆë²¨ í”„ë¡œí¼í‹°
     /// </summary>
     internal byte Level
     {
@@ -28,97 +28,97 @@ public class Object : MonoBehaviour
         }
     }
     /// <summary>
-    /// °ø°İ·Â º¯¼ö
+    /// ê³µê²©ë ¥ ë³€ìˆ˜
     /// </summary>
     protected int atk = 1;
     /// <summary>
-    /// ¹æ¾î·Â º¯¼ö
+    /// ë°©ì–´ë ¥ ë³€ìˆ˜
     /// </summary>
     protected int def = 1;
 }
 class item : Object
 {
     /// <summary>
-    /// ¾ÆÀÌÅÛÀÇ ½ºÇÁ¶óÀÌÆ® ¾ÆÀÌÄÜÀ» ³Ö´Â ÀÚ¸®ÀÔ´Ï´Ù.
+    /// ì•„ì´í…œì˜ ìŠ¤í”„ë¼ì´íŠ¸ ì•„ì´ì½˜ì„ ë„£ëŠ” ìë¦¬ì…ë‹ˆë‹¤.
     /// </summary>
-    [Tooltip("¾ÆÀÌÅÛÀÇ ½ºÇÁ¶óÀÌÆ® ¾ÆÀÌÄÜÀ» ³Ö´Â ÀÚ¸®ÀÔ´Ï´Ù.")]
+    [Tooltip("ì•„ì´í…œì˜ ìŠ¤í”„ë¼ì´íŠ¸ ì•„ì´ì½˜ì„ ë„£ëŠ” ìë¦¬ì…ë‹ˆë‹¤.")]
     [SerializeField] Sprite icon;
     /// <summary>
-    /// ¾ÆÀÌÅÛÀÇ °¡°İ
+    /// ì•„ì´í…œì˜ ê°€ê²©
     /// </summary>
     int price = 0;
     /// <summary>
-    /// ·¹º§¾÷ ½Ã ¼Ò¸ğ°ñµå
+    /// ë ˆë²¨ì—… ì‹œ ì†Œëª¨ê³¨ë“œ
     /// </summary>
     int lvUpPrice = 0;
     /// <summary>
-    /// ÀåÂø¿©ºÎ È®ÀÎ
+    /// ì¥ì°©ì—¬ë¶€ í™•ì¸
     /// </summary>
     bool isEquip = false;
     /// <summary>
-    /// ¾ÆÀÌÅÛ ½Àµæ
+    /// ì•„ì´í…œ ìŠµë“
     /// </summary>
     void GetItem() { }
     /// <summary>
-    /// ¾ÆÀÌÅÛ °¨¼Ò
+    /// ì•„ì´í…œ ê°ì†Œ
     /// </summary>
     void RidItem() { }
     /// <summary>
-    /// ¾ÆÀÌÅÛ ±¸¸Å
+    /// ì•„ì´í…œ êµ¬ë§¤
     /// </summary>
     void BuyItem() { }
     /// <summary>
-    /// ¾ÆÀÌÅÛ ÆÇ¸Å
+    /// ì•„ì´í…œ íŒë§¤
     /// </summary>
     void SellItem() { }
 }
 class BattleUnit : Object
 {
     /// <summary>
-    /// ÃÑ Ã¼·Â
+    /// ì´ ì²´ë ¥
     /// </summary>
     protected int hp = 1;
     /// <summary>
-    /// ÇöÀç Ã¼·Â
+    /// í˜„ì¬ ì²´ë ¥
     /// </summary>
     protected int currentHp = 1;
     /// <summary>
-    /// ÃÑ ¸¶·Â
+    /// ì´ ë§ˆë ¥
     /// </summary>
     protected int mp = 1;
     /// <summary>
-    /// ÇöÀç ¸¶·Â
+    /// í˜„ì¬ ë§ˆë ¥
     /// </summary>
     protected int currentMp = 1;
     /// <summary>
-    /// µ¥¹ÌÁö ¼öÄ¡
+    /// ë°ë¯¸ì§€ ìˆ˜ì¹˜
     /// </summary>
     protected int damage = 1;
     /// <summary>
-    /// Á×À½ ÆÇÁ¤
+    /// ì£½ìŒ íŒì •
     /// </summary>
     protected bool isDead = false;
     /// <summary>
-    /// °ø°İµ¥¹ÌÁö °è»ê
+    /// ê³µê²©ë°ë¯¸ì§€ ê³„ì‚°
     /// </summary>
     void Attack() { }
     /// <summary>
-    /// ¸Â°í ³²Àº Ã¼·Â¸¦ µ¹·ÁÁÜ
+    /// ë§ê³  ë‚¨ì€ ì²´ë ¥ë¥¼ ëŒë ¤ì¤Œ
     /// </summary>
     protected int Damaged(int otherDmg)
     {
         otherDmg -= def;
         if (otherDmg <= 0)
         {
-            Debug.Log("¹æ¾î ¼º°ø");
+            Debug.Log("ë°©ì–´ ì„±ê³µ");
             return Consts.noDamage;
         }
         else
         { return reduceHp(otherDmg); }
     }
     /// <summary>
-    /// hpDmg¸¸Å­ Ã¼·ÂÀ» ±ğ°í µ¹·ÁÁØ´Ù.
-    /// Ã¼·ÂÀÌ 0ÀÌ µÇ¸é Á×À½ »óÅÂ°¡ µÈ´Ù.
+    /// hpDmgë§Œí¼ ì²´ë ¥ì„ ê¹ê³  ëŒë ¤ì¤€ë‹¤.
+    /// ì²´ë ¥ì´ 0ì´ ë˜ë©´ ì£½ìŒ ìƒíƒœê°€ ëœë‹¤.
     /// </summary>
     /// <param name="hpDmg"></param>
     /// <returns></returns>
@@ -134,7 +134,7 @@ class BattleUnit : Object
 
     }
     /// <summary>
-    /// usedMp¿¡ »ç¿ëmp°ªÀ» ÀÔ·ÂÇÏ¸é ±â¼úÀ» ¾µ¼ö ÀÖ´ÂÁö ¾ø´ÂÁö ÆÇ´ÜÇØ¼­ µ¹·ÁÁØ´Ù.
+    /// usedMpì— ì‚¬ìš©mpê°’ì„ ì…ë ¥í•˜ë©´ ê¸°ìˆ ì„ ì“¸ìˆ˜ ìˆëŠ”ì§€ ì—†ëŠ”ì§€ íŒë‹¨í•´ì„œ ëŒë ¤ì¤€ë‹¤.
     /// </summary>
     /// <param name="usedMp"></param>
     /// <returns></returns>
@@ -142,7 +142,7 @@ class BattleUnit : Object
     {
         if (currentMp - usedMp < 0)
         {
-            Debug.Log("Mp°¡ ºÎÁ·ÇÕ´Ï´Ù.");
+            Debug.Log("Mpê°€ ë¶€ì¡±í•©ë‹ˆë‹¤.");
             return false;
         }
         else
@@ -152,12 +152,12 @@ class BattleUnit : Object
         }
     }
     /// <summary>
-    /// Á×¾úÀ¸¸é isDead¸¦ true·Î ¹Ù²ãÁÜ.
+    /// ì£½ì—ˆìœ¼ë©´ isDeadë¥¼ trueë¡œ ë°”ê¿”ì¤Œ.
     /// </summary>
     protected void Dead()
     { isDead = true; }
     /// <summary>
-    /// increaseDMG¸¸Å­ µ¥¹ÌÁö¸¦ ´õÇØ¼­ µ¹·ÁÁØ´Ù.
+    /// increaseDMGë§Œí¼ ë°ë¯¸ì§€ë¥¼ ë”í•´ì„œ ëŒë ¤ì¤€ë‹¤.
     /// </summary>
     /// <param name="increaseDmg"></param>
     /// <returns></returns>
@@ -166,47 +166,47 @@ class BattleUnit : Object
 }
 
 /// <summary>
-/// ÇÃ·¹ÀÌ¾î Å¬·¡½º
+/// í”Œë ˆì´ì–´ í´ë˜ìŠ¤
 /// </summary>
 class Player : BattleUnit
 {
     /// <summary>
-    /// ÃÑ °æÇèÄ¡
+    /// ì´ ê²½í—˜ì¹˜
     /// </summary>
     int exp = 1;
     /// <summary>
-    /// ÇöÀç °æÇèÄ¡
+    /// í˜„ì¬ ê²½í—˜ì¹˜
     /// </summary>
     int currentExp = 0;
     /// <summary>
-    /// °æÇèÄ¡ ÃÊ±âÈ­
+    /// ê²½í—˜ì¹˜ ì´ˆê¸°í™”
     /// </summary>
     /// <returns></returns>
     int ResetExp()
     { return currentExp = 0; }
     /// <summary>
-    /// plusExp¸¸Å­ °æÇèÄ¡¸¦ Áõ°¡½ÃÅ´.
+    /// plusExpë§Œí¼ ê²½í—˜ì¹˜ë¥¼ ì¦ê°€ì‹œí‚´.
     /// </summary>
     /// <param name="plusExp"></param>
     /// <returns></returns>
     int IncreaseExp(int plusExp)
     { return currentExp += plusExp; }
     /// <summary>
-    /// plusExp¸¸Å­ ÃÑ °æÇèÄ¡ Áõ°¡.
+    /// plusExpë§Œí¼ ì´ ê²½í—˜ì¹˜ ì¦ê°€.
     /// </summary>
     /// <param name="plusExp"></param>
     /// <returns></returns>
     int IncreaseWholeExp(int plusExp)
     { return exp += plusExp; }
     /// <summary>
-    /// plusHp¸¸Å­ ÃÑ Ã¼·Â Áõ°¡.
+    /// plusHpë§Œí¼ ì´ ì²´ë ¥ ì¦ê°€.
     /// </summary>
     /// <param name="plusHp"></param>
     /// <returns></returns>
     int IncreaseWholeHp(int plusHp)
     { return hp += plusHp; }
     /// <summary>
-    /// plusMp¸¸Å­ ÃÑ ¸¶·Â Áõ°¡.
+    /// plusMpë§Œí¼ ì´ ë§ˆë ¥ ì¦ê°€.
     /// </summary>
     /// <param name="plusMp"></param>
     /// <returns></returns>
@@ -214,43 +214,43 @@ class Player : BattleUnit
     { return mp += plusMp; }
 }
 /// <summary>
-/// ¸ó½ºÅÍ Å¬·¡½º
+/// ëª¬ìŠ¤í„° í´ë˜ìŠ¤
 /// </summary>
 class Monster : BattleUnit
 {
     /// <summary>
-    /// µå¶øÇÏ´Â Exp ¼öÄ¡
+    /// ë“œëí•˜ëŠ” Exp ìˆ˜ì¹˜
     /// </summary>
     int dropExp = 0;
     /// <summary>
-    /// µå¶øÇÏ´Â °ñµå ¼öÄ¡
+    /// ë“œëí•˜ëŠ” ê³¨ë“œ ìˆ˜ì¹˜
     /// </summary>
     int dropGold = 0;
     /// <summary>
-    /// µå¶øÇÏ´Â ¾ÆÀÌÅÛ
+    /// ë“œëí•˜ëŠ” ì•„ì´í…œ
     /// </summary>
     item dropItem;
     /// <summary>
-    /// º¸»ó µå¸³ ÇÔ¼ö
+    /// ë³´ìƒ ë“œë¦½ í•¨ìˆ˜
     /// </summary>
     void DropReward()
     { }
 }
 /// <summary>
-/// ·¹º§¾÷ °ü·Ã Å¬·¡½º
+/// ë ˆë²¨ì—… ê´€ë ¨ í´ë˜ìŠ¤
 /// </summary>
 class Level
 {
     /// <summary>
-    /// ÇöÀç ·¹º§À» ³ÖÀ¸¸é 1 ¿À¸¥´Ù.
+    /// í˜„ì¬ ë ˆë²¨ì„ ë„£ìœ¼ë©´ 1 ì˜¤ë¥¸ë‹¤.
     /// </summary>
     /// <param name="currentLevel"></param>
     /// <returns></returns>
     int IncreaseLevel(int currentLevel)
     { return ++currentLevel; }
     /// <summary>
-    /// ÇöÀç°ª°ú ´õÇÏ·Á´Â °ªÀ» ³ÖÀ¸¸é ´õÇÑ °ªÀ» ¸®ÅÏÇÑ´Ù.
-    /// °ø°İ·Â Áõ°¡, ¹æ¾î·Â Áõ°¡¿ë.
+    /// í˜„ì¬ê°’ê³¼ ë”í•˜ë ¤ëŠ” ê°’ì„ ë„£ìœ¼ë©´ ë”í•œ ê°’ì„ ë¦¬í„´í•œë‹¤.
+    /// ê³µê²©ë ¥ ì¦ê°€, ë°©ì–´ë ¥ ì¦ê°€ìš©.
     /// </summary>
     /// <param name="currentValue"></param>
     /// <param name="plusValue"></param>

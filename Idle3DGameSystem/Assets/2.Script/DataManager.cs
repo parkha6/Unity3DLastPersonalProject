@@ -3,22 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// ÇÃ·¹ÀÌ¾î µ¥ÀÌÅÍ Ã³¸®¿ë ¸Å´ÏÀú
+/// í”Œë ˆì´ì–´ ë°ì´í„° ì²˜ë¦¬ìš© ë§¤ë‹ˆì €
 /// </summary>
 public class DataManager : MonoSingleton<DataManager>
 {
     /// <summary>
-    /// ÃÊ±â¿¡ ÇÃ·¹ÀÌ¾î ÀÌ¸§ ÀÔ·Â
+    /// ì´ˆê¸°ì— í”Œë ˆì´ì–´ ì´ë¦„ ì…ë ¥
     /// </summary>
     void InputPlayerName()
     { }
     /// <summary>
-    /// ÇÃ·¹ÀÌ¾î µ¥ÀÌÅÍ ºÒ·¯¿À±â
+    /// í”Œë ˆì´ì–´ ë°ì´í„° ë¶ˆëŸ¬ì˜¤ê¸°
     /// </summary>
     void LoadPlayerData()
     { }
     /// <summary>
-    /// ÇÃ·¹ÀÌ¾î µ¥ÀÌÅÍ ÀúÀåÇÏ±â
+    /// í”Œë ˆì´ì–´ ë°ì´í„° ì €ì¥í•˜ê¸°
     /// </summary>
     void SavePlayerData()
     { }
