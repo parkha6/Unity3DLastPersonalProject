@@ -26,19 +26,6 @@ public class Inventory : MonoBehaviour
     void HoldingItems()
     { }
 }
-
-class Stage
-{
-    /// <summary>
-    /// 현재 스테이지
-    /// </summary>
-    int currentStage = 1;
-    /// <summary>
-    /// currentStage보다 스테이지 1상승
-    /// </summary>
-    int IncreaseStage()
-    { return ++currentStage; }
-}
 class Gold
 {
     /// <summary>

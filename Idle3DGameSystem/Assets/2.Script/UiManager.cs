@@ -88,6 +88,17 @@ public class UiManager : MonoSingleton<UiManager>
     /// </summary>
     [Tooltip("플레이어 경험치 바 이미지")]
     [SerializeField] Image userExpBar;
+    [Header("스테이지 UI")]
+    /// <summary>
+    /// 스테이지 UI
+    /// </summary>
+    [Tooltip("스테이지 UI")]
+    [SerializeField] GameObject stageUi;
+    /// <summary>
+    /// 스테이지 표시 텍스트
+    /// </summary>
+    [Tooltip("스테이지 표시 텍스트")]
+    [SerializeField] TMP_Text stageText;
     [Header("사용자 정보 UI")]
     /// <summary>
     /// 사용자 정보 UI 띄우는 버튼
@@ -99,6 +110,11 @@ public class UiManager : MonoSingleton<UiManager>
     /// </summary>
     [Tooltip("사용자 정보 UI창")]
     [SerializeField] GameObject playerInfoUi;
+    /// <summary>
+    /// 사용자 정보 UI 닫는 버튼
+    /// </summary>
+    [Tooltip("사용자 정보 UI 닫는 버튼")]
+    [SerializeField] Button infoCloseButton;
     /// <summary>
     /// 이름 입력창 활성 & 비활성
     /// </summary>
@@ -130,6 +146,20 @@ public class UiManager : MonoSingleton<UiManager>
     /// <returns></returns>
     internal string LevelText(byte inputLevel)
     { return userLevel.text = $"레벨 {inputLevel.ToString()}"; }
+    /// <summary>
+    /// 스테이지 UI활성 & 비활성
+    /// </summary>
+    /// <param name="isSet"></param>
+    internal void StageUI(bool isSet)
+    { stageUi.SetActive(isSet); }
+    /// <summary>
+    /// 스테이지 mainStage - subStage로 스테이지 텍스트에 표시
+    /// </summary>
+    /// <param name="mainStage"></param>
+    /// <param name="subStage"></param>
+    /// <returns></returns>
+    internal string StageText(int mainStage, int subStage)
+    { return stageText.text = $"스테이지 {mainStage}-{subStage}"; }
     /// <summary>
     /// 플레이어 정보창 활성
     /// </summary>
@@ -163,5 +193,9 @@ public class UiManager : MonoSingleton<UiManager>
             infoButton.onClick.AddListener(PlayerInfoActive);
         else
             Debug.Log("인포버튼 없음");
+        if (infoCloseButton != null)
+            infoCloseButton.onClick.AddListener(PlayerInfoDeactive);
+        else
+            Debug.Log("인포 닫힘 버튼 없음");
     }
 }

@@ -46,7 +46,7 @@ public class GameManager : MonoSingleton<GameManager>
         }
     }
     /// <summary>
-    /// 플레이어 변수
+    /// 플레이어 클래스 변수
     /// </summary>
     [SerializeField] private Player player;
     /// <summary>
@@ -65,9 +65,16 @@ public class GameManager : MonoSingleton<GameManager>
             return player;
         }
     }
+    /// <summary>
+    /// 스테이지 클래스 변수 
+    /// </summary>
+    [Tooltip("스테이지 클래스 변수")]
+    [SerializeField] private Stage stage;
+    /// <summary>
+    /// 게임 시작 시점
+    /// </summary>
     private void Start()
     { StartGame(); }
-
     /// <summary>
     /// 게임 시작
     /// </summary>
@@ -99,15 +106,23 @@ public class GameManager : MonoSingleton<GameManager>
         if (uiManager != null)
         {
             UiMan.TypeNameUI(false);
-            if (player != null)
-                DrawPlayerUI();
-            else
-                Debug.Log("플레이어 없음");
-            UiMan.UserUI(true);
+            InitialUISetting();
         }
         else
             Debug.Log("UI매니저 없음");
 
+    }
+    /// <summary>
+    /// 초기 UI세팅
+    /// </summary>
+    void InitialUISetting()
+    {
+        if (player != null && stage != null)
+            DrawPlayerUI();
+        else
+            Debug.Log("플레이어나 스테이지 없음");
+        UiMan.UserUI(true);
+        UiMan.StageUI(true);
     }
     /// <summary>
     /// 플레이어의 정보를 UI에 표시한다.
@@ -116,6 +131,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         UiMan.NameText(User.nameIs);
         UiMan.LevelText(User.Level);
+        UiMan.StageText(stage.MainStage, stage.SubStage);
     }
     /// <summary>
     /// 플레이어 턴
@@ -132,7 +148,9 @@ public class GameManager : MonoSingleton<GameManager>
     /// </summary>
     void QuitGame()
     { }
-
+    /// <summary>
+    /// 싱글턴 세팅
+    /// </summary>
     private void Awake()
     {
         if (uiManager == null)
