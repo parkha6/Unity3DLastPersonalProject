@@ -104,13 +104,18 @@ public class UiManager : MonoSingleton<UiManager>
     /// </summary>
     /// <param name="isSet"></param>
     internal void TypeNameUI(bool isSet)
-    { typeNameUI.SetActive(isSet); }
+    {
+        if (typeNameUI != null)
+            typeNameUI.SetActive(isSet);
+        else
+            Debug.Log("이름 입력창 없음");
+    }
     /// <summary>
     /// 플레이어 인게임 UI 활성 & 비활성
     /// </summary>
     /// <param name="isSet"></param>
     internal void UserUI(bool isSet)
-    { userUi.SetActive(isSet);}
+    { userUi.SetActive(isSet); }
     /// <summary>
     /// inputName을 입력하면 플레이어 이름 텍스트에 표시함.
     /// </summary>
@@ -135,9 +140,28 @@ public class UiManager : MonoSingleton<UiManager>
     /// </summary>
     void PlayerInfoDeactive()
     { playerInfoUi.SetActive(false); }
+    /// <summary>
+    /// 매니저 호출
+    /// </summary>
     private void Awake()
-    { 
-        enterName.onClick.AddListener(GameMan.EnterName);
-        infoButton.onClick.AddListener(PlayerInfoActive);
+    {
+        if (gameManager == null)
+        {
+            gameManager = GetComponent<GameManager>();
+            if (gameManager == null)
+            { gameManager = gameObject.AddComponent<GameManager>(); }
+        }
+    }
+    private void Start()
+    {
+
+        if (enterName != null)
+            enterName.onClick.AddListener(GameMan.EnterName);
+        else
+            Debug.Log("입력버튼 없음");
+        if (infoButton != null)
+            infoButton.onClick.AddListener(PlayerInfoActive);
+        else
+            Debug.Log("인포버튼 없음");
     }
 }

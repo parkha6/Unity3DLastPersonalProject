@@ -45,4 +45,13 @@ public class DataManager : MonoSingleton<DataManager>
     /// </summary>
     void SavePlayerData()
     { }
+    private void Awake()
+    {
+        if (uiManager == null)
+        {
+            uiManager = GetComponent<UiManager>();
+            if (uiManager == null)
+            { uiManager = gameObject.AddComponent<UiManager>(); }
+        }
+    }
 }
