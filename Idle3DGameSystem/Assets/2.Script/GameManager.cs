@@ -68,13 +68,16 @@ public class GameManager : MonoSingleton<GameManager>
     /// </summary>
     internal void StartGame()
     { SetName();}
+    /// <summary>
+    /// 이름입력을 위한 세팅 함수
+    /// </summary>
     private void SetName()
     {
         Debug.Log("UI켜짐");
         UiMan.TypeNameUI(true);
     }
     /// <summary>
-    /// 이름값을 세팅함.
+    /// 이름값을 세팅하면 이름 UI가 꺼짐
     /// </summary>
     internal void EnterName()
     {
