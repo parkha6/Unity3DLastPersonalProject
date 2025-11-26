@@ -88,6 +88,12 @@ public class UiManager : MonoSingleton<UiManager>
     /// </summary>
     [Tooltip("플레이어 경험치 바 이미지")]
     [SerializeField] Image userExpBar;
+    [Header("사용자 정보 UI")]
+    /// <summary>
+    /// 사용자 정보 UI 띄우는 버튼
+    /// </summary>
+    [Tooltip("사용자 정보 UI 띄우는 버튼")]
+    [SerializeField] Button infoButton;
     /// <summary>
     /// 사용자 정보 UI창
     /// </summary>
@@ -120,10 +126,18 @@ public class UiManager : MonoSingleton<UiManager>
     internal string LevelText(byte inputLevel)
     { return userLevel.text = $"레벨 {inputLevel.ToString()}"; }
     /// <summary>
-    /// 플레이어 정보창 활성&비활성
+    /// 플레이어 정보창 활성
     /// </summary>
-    void PlayerInfo(bool isSet)
-    { playerInfoUi.SetActive(isSet); }
+    void PlayerInfoActive()
+    { playerInfoUi.SetActive(true); }
+    /// <summary>
+    /// 플레이어 정보창 비활성
+    /// </summary>
+    void PlayerInfoDeactive()
+    { playerInfoUi.SetActive(false); }
     private void Awake()
-    { enterName.onClick.AddListener(GameMan.EnterName); }
+    { 
+        enterName.onClick.AddListener(GameMan.EnterName);
+        infoButton.onClick.AddListener(PlayerInfoActive);
+    }
 }
