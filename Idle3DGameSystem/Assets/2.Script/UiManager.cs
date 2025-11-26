@@ -58,16 +58,5 @@ public class UiManager : MonoSingleton<UiManager>
     void PlayerInfo(bool isSet)
     { playerInfoUi.SetActive(isSet); }
     private void Awake()
-    {
-        if (gameManager == null)
-        {
-            gameManager = GetComponent<GameManager>();
-            if (gameManager == null)
-            { gameManager = gameObject.AddComponent<GameManager>(); }
-        }
-    }
-    private void Start()
-    {
-        enterName.onClick.AddListener(gameManager.EnterName);
-    }
+    { enterName.onClick.AddListener(GameMan.EnterName); }
 }

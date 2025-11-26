@@ -52,28 +52,11 @@ public class GameManager : MonoSingleton<GameManager>
     {
         get
         {
+            player = GetComponent<Player>();
             if (player == null)
-            { player = GetComponent<Player>(); }
+            { player = gameObject.AddComponent<Player>(); }
             return player;
         }
-    }
-
-    private void Awake()
-    {
-        if (uiManager == null)
-        {
-            uiManager = GetComponent<UiManager>();
-            if (uiManager == null)
-            { uiManager = gameObject.AddComponent<UiManager>(); }
-        }
-        if (dataManager == null)
-        {
-            dataManager = GetComponent<DataManager>();
-            if (dataManager == null)
-            { dataManager = gameObject.AddComponent<DataManager>(); }
-        }
-        if (player == null)
-        { player = GetComponent<Player>(); }
     }
     private void Start()
     {
@@ -84,13 +67,11 @@ public class GameManager : MonoSingleton<GameManager>
     /// 게임 시작
     /// </summary>
     internal void StartGame()
-    {
-        SetName();
-    }
+    { SetName();}
     private void SetName()
     {
         Debug.Log("UI켜짐");
-        uiManager.TypeNameUI(true);
+        UiMan.TypeNameUI(true);
     }
     /// <summary>
     /// 이름값을 세팅함.
@@ -98,9 +79,9 @@ public class GameManager : MonoSingleton<GameManager>
     internal void EnterName()
     {
         Debug.Log("이름 입력");
-        player.nameIs = dataManager.InputPlayerName(player.nameIs);
+        User.nameIs = DataMan.InputPlayerName(User.nameIs);
         Debug.Log("UI꺼짐");
-        uiManager.TypeNameUI(false);
+        UiMan.TypeNameUI(false);
     }
     /// <summary>
     /// 플레이어 턴
