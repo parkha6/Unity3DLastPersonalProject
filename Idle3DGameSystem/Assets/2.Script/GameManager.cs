@@ -90,10 +90,13 @@ public class GameManager : MonoSingleton<GameManager>
             Debug.Log("데이터 매니저 없음");
         else
             Debug.Log("플레이어와 데이터 매니저 둘다 없음.");
-            if (uiManager != null)
+        if (uiManager != null)
         {
             UiMan.TypeNameUI(false);
-            DrawPlayerUI();
+            if (player != null)
+                DrawPlayerUI();
+            else
+                Debug.Log("플레이어 없음");
             UiMan.UserUI(true);
         }
         else
