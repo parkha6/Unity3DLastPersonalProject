@@ -111,6 +111,17 @@ public class UiManager : MonoSingleton<UiManager>
     [Tooltip("사용자 정보 UI창")]
     [SerializeField] GameObject playerInfoUi;
     /// <summary>
+    /// 사용자 정보 이름 텍스트
+    /// </summary>
+    [Tooltip("사용자 정보 이름 텍스트")]
+    [SerializeField] TMP_Text infoNameText;
+    /// <summary>
+    /// 사용자 정보 레벨 텍스트
+    /// </summary>
+    [Tooltip("사용자 정보 레벨 텍스트")]
+    [SerializeField] TMP_Text infoLevelText;
+
+    /// <summary>
     /// 사용자 정보 UI 닫는 버튼
     /// </summary>
     [Tooltip("사용자 정보 UI 닫는 버튼")]
@@ -138,14 +149,22 @@ public class UiManager : MonoSingleton<UiManager>
     /// <param name="inputName"></param>
     /// <returns></returns>
     internal string NameText(string inputName)
-    { return userName.text = inputName; }
+    {
+        userName.text = inputName;
+        infoNameText.text = inputName;
+        return userName.text;
+    }
     /// <summary>
     /// inputLevel에 입력한 바이트값을 플레이어 레벨 텍스트에 표시함.
     /// </summary>
     /// <param name="inputLevel"></param>
     /// <returns></returns>
     internal string LevelText(byte inputLevel)
-    { return userLevel.text = $"레벨 {inputLevel.ToString()}"; }
+    {
+        userLevel.text = $"레벨 {inputLevel.ToString()}";
+        infoLevelText.text = $"레벨 {inputLevel.ToString()}";
+        return userLevel.text;
+    }
     /// <summary>
     /// 스테이지 UI활성 & 비활성
     /// </summary>
