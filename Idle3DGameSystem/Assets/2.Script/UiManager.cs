@@ -118,7 +118,7 @@ public class UiManager : MonoSingleton<UiManager>
     /// <param name="inputLevel"></param>
     /// <returns></returns>
     internal string LevelText(byte inputLevel)
-    { return userLevel.text = inputLevel.ToString(); }
+    { return userLevel.text = $"레벨 {inputLevel.ToString()}"; }
     /// <summary>
     /// 플레이어 정보창 활성&비활성
     /// </summary>
