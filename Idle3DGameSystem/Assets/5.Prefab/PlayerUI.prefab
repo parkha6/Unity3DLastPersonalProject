@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2970229861245884607}
   - component: {fileID: 6820248343937189642}
   m_Layer: 5
-  m_Name: ExpScreen
+  m_Name: Exp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

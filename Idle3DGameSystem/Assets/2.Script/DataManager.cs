@@ -33,19 +33,16 @@ public class DataManager : MonoSingleton<DataManager>
     /// <summary>
     /// 플레이어 이름 입력값을 돌려줌
     /// </summary>
-    internal string InputPlayerName(string value)
-    {
-        value = UiMan.inputName.text;
-        return value;
-    }
-/// <summary>
-/// 플레이어 데이터 불러오기
-/// </summary>
-void LoadPlayerData()
-{ }
-/// <summary>
-/// 플레이어 데이터 저장하기
-/// </summary>
-void SavePlayerData()
-{ }
+    internal string InputPlayerName()
+    { return UiMan.inputName.text; }
+    /// <summary>
+    /// 플레이어 데이터 불러오기
+    /// </summary>
+    void LoadPlayerData()
+    { }
+    /// <summary>
+    /// 플레이어 데이터 저장하기
+    /// </summary>
+    void SavePlayerData()
+    { }
 }

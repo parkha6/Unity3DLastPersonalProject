@@ -106,4 +106,6 @@ internal class Player : BattleUnit
     /// <returns></returns>
     int IncreaseWholeMp(int plusMp)
     { return mp += plusMp; }
+    internal void InputName(string inputName)
+    { nameIs = inputName; }
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -59,32 +57,35 @@ public class GameManager : MonoSingleton<GameManager>
         }
     }
     private void Start()
-    {
-        StartGame();
-    }
+    { StartGame(); }
 
     /// <summary>
     /// 게임 시작
     /// </summary>
     internal void StartGame()
-    { SetName();}
+    { SetName(); }
     /// <summary>
     /// 이름입력을 위한 세팅 함수
     /// </summary>
     private void SetName()
-    {
-        Debug.Log("UI켜짐");
-        UiMan.TypeNameUI(true);
-    }
+    { UiMan.TypeNameUI(true); }
     /// <summary>
     /// 이름값을 세팅하면 이름 UI가 꺼짐
     /// </summary>
     internal void EnterName()
     {
-        Debug.Log("이름 입력");
-        User.nameIs = DataMan.InputPlayerName(User.nameIs);
-        Debug.Log("UI꺼짐");
+        User.InputName(DataMan.InputPlayerName());
         UiMan.TypeNameUI(false);
+        DrawPlayerUI();
+        UiMan.UserUI(true);
+    }
+    /// <summary>
+    /// 플레이어의 정보를 UI에 표시한다.
+    /// </summary>
+    void DrawPlayerUI()
+    {
+        UiMan.NameText(User.nameIs);
+        UiMan.LevelText(User.Level);
     }
     /// <summary>
     /// 플레이어 턴

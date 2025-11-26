@@ -11,7 +11,7 @@ public class Object : MonoBehaviour
     /// <summary>
     /// 레벨 변수
     /// </summary>
-    protected byte level = 0;
+    protected byte level = 1;
     /// <summary>
     /// 255이상과 음수값을 막기 위한 레벨 프로퍼티
     /// </summary>

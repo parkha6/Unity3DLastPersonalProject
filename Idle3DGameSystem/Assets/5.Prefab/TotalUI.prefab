@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 2386704831852641107}
   - component: {fileID: 8149350351356041030}
   m_Layer: 5
-  m_Name: LevelScreen
+  m_Name: Level
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -325,7 +325,7 @@ GameObject:
   - component: {fileID: 3870383842295792412}
   - component: {fileID: 7590056875246948278}
   m_Layer: 5
-  m_Name: NameScreen
+  m_Name: Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

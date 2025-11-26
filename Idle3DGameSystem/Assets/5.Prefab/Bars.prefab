@@ -49,7 +49,7 @@ GameObject:
   - component: {fileID: 4914167643473669569}
   - component: {fileID: 7078942645852747772}
   m_Layer: 5
-  m_Name: MPScreen
+  m_Name: MP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 6773324456572222273}
   - component: {fileID: 4324727867116584324}
   m_Layer: 5
-  m_Name: HPScreen
+  m_Name: HP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
