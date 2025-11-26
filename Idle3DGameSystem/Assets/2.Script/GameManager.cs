@@ -45,7 +45,13 @@ public class GameManager : MonoSingleton<GameManager>
             return dataManager;
         }
     }
-    private Player player;
+    /// <summary>
+    /// 플레이어 변수
+    /// </summary>
+    [SerializeField] private Player player;
+    /// <summary>
+    /// 플레이어 프로퍼티
+    /// </summary>
     internal Player User
     {
         get
