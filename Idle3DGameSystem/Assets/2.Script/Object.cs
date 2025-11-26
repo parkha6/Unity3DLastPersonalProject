@@ -7,7 +7,7 @@ public class Object : MonoBehaviour
     /// <summary>
     /// 이름 변수
     /// </summary>
-    protected string nameIs = "알 수 없음";
+    internal string nameIs = "알 수 없음";
     /// <summary>
     /// 레벨 변수
     /// </summary>
@@ -163,55 +163,6 @@ class BattleUnit : Object
     /// <returns></returns>
     protected int DamageIncrease(int increaseDmg)
     { return damage += increaseDmg; }
-}
-
-/// <summary>
-/// 플레이어 클래스
-/// </summary>
-class Player : BattleUnit
-{
-    /// <summary>
-    /// 총 경험치
-    /// </summary>
-    int exp = 1;
-    /// <summary>
-    /// 현재 경험치
-    /// </summary>
-    int currentExp = 0;
-    /// <summary>
-    /// 경험치 초기화
-    /// </summary>
-    /// <returns></returns>
-    int ResetExp()
-    { return currentExp = 0; }
-    /// <summary>
-    /// plusExp만큼 경험치를 증가시킴.
-    /// </summary>
-    /// <param name="plusExp"></param>
-    /// <returns></returns>
-    int IncreaseExp(int plusExp)
-    { return currentExp += plusExp; }
-    /// <summary>
-    /// plusExp만큼 총 경험치 증가.
-    /// </summary>
-    /// <param name="plusExp"></param>
-    /// <returns></returns>
-    int IncreaseWholeExp(int plusExp)
-    { return exp += plusExp; }
-    /// <summary>
-    /// plusHp만큼 총 체력 증가.
-    /// </summary>
-    /// <param name="plusHp"></param>
-    /// <returns></returns>
-    int IncreaseWholeHp(int plusHp)
-    { return hp += plusHp; }
-    /// <summary>
-    /// plusMp만큼 총 마력 증가.
-    /// </summary>
-    /// <param name="plusMp"></param>
-    /// <returns></returns>
-    int IncreaseWholeMp(int plusMp)
-    { return mp += plusMp; }
 }
 /// <summary>
 /// 몬스터 클래스

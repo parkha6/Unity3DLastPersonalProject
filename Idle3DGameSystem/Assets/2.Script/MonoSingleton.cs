@@ -26,7 +26,7 @@ public class MonoSingleton<T> : MonoBehaviour where T : Component
     }
     private void Awake()
     {
-        if (Instance != null && Instance != this)
+        if (instance != null && instance != this)
         { Destroy(Instance.gameObject); }
         else
         { DontDestroyOnLoad(this.gameObject); }
