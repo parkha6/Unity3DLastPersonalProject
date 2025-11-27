@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Drawing;
 using UnityEngine;
 /// <summary>
 /// 플레이어 클래스
@@ -19,6 +20,10 @@ internal class Player : BattleUnit
     /// 스텟포인트
     /// </summary>
     int statPoint = Consts.none;
+    /// <summary>
+    /// 스텟포인트 읽기 전용
+    /// </summary>
+    internal int StatPoint { get { return statPoint; } }
     /// <summary>
     /// 총 경험치
     /// </summary>
@@ -67,7 +72,69 @@ internal class Player : BattleUnit
         exp += Consts.barStat;
         UiManager.Instance.LevelText(Level);
         statPoint += Consts.plusStatPoint;
+        UiManager.Instance.SetPoint(StatPoint);
+        UiManager.Instance.SetUpButton(true);
         UiManager.Instance.SetExp(CurrentExp, Exp);
+    }
+    /// <summary>
+    /// 버튼 누르면 체력 10오름
+    /// </summary>
+    internal void SetHpUp()
+    {
+        if (statPoint > 0)
+        {
+            --statPoint;
+            Hp += Consts.barStat;
+            UiManager.Instance.SetHp(CurrentHp, Hp);
+            UiManager.Instance.SetPoint(StatPoint);
+        }
+        if (statPoint <= 0)
+        { UiManager.Instance.SetUpButton(false); }
+    }
+    /// <summary>
+    /// 버튼 누르면 마력 10오름
+    /// </summary>
+    internal void SetMpUp()
+    {
+        if (statPoint > 0)
+        {
+            --statPoint;
+            Mp += Consts.barStat;
+            UiManager.Instance.SetMp(CurrentMp, Mp);
+            UiManager.Instance.SetPoint(StatPoint);
+        }
+        if (statPoint <= 0)
+        { UiManager.Instance.SetUpButton(false); }
+    }
+    /// <summary>
+    /// 버튼 누르면 공격력 1오름
+    /// </summary>
+    internal void SetAtkUp()
+    {
+        if (statPoint > 0)
+        {
+            --statPoint;
+            ++Atk;
+            UiManager.Instance.SetAtk(Atk);
+            UiManager.Instance.SetPoint(StatPoint);
+        }
+        if (statPoint <= 0)
+        { UiManager.Instance.SetUpButton(false); }
+    }
+    /// <summary>
+    /// 버튼 누르면 방어력 1오름
+    /// </summary>
+    internal void SetDefUp()
+    {
+        if (statPoint > 0)
+        {
+            --statPoint;
+            ++Def;
+            UiManager.Instance.SetDef(Def);
+            UiManager.Instance.SetPoint(StatPoint);
+        }
+        if (statPoint <= 0)
+        { UiManager.Instance.SetUpButton(false); }
     }
     /// <summary>
     /// 이름 입력 함수
@@ -91,7 +158,7 @@ internal class Player : BattleUnit
     /// </summary>
     /// <param name="otherDmg"></param>
     internal override void GetAttacked(int otherDmg)
-    {StartCoroutine(DamagedAnimation(otherDmg));}
+    { StartCoroutine(DamagedAnimation(otherDmg)); }
     /// <summary>
     /// 맞는 애니메이션 재생용 코루틴
     /// </summary>

@@ -166,10 +166,41 @@ public class UiManager : MonoSingleton<UiManager>
     [Tooltip("사용자 정보 소지금 텍스트")]
     [SerializeField] TMP_Text infoGold;
     /// <summary>
+    /// 사용자 정보 레벨업 포인트 텍스트
+    /// </summary>
+    [Tooltip("사용자 정보 레벨업 포인트 텍스트")]
+    [SerializeField] TMP_Text infoPoint;
+    /// <summary>
     /// 사용자 정보 UI 닫는 버튼
     /// </summary>
     [Tooltip("사용자 정보 UI 닫는 버튼")]
     [SerializeField] Button infoCloseButton;
+    [Header("포인트 업 버튼")]
+    /// <summary>
+    /// 버튼 UI
+    /// </summary>
+    [Tooltip("버튼 UI")]
+    [SerializeField] GameObject UpUi;
+    /// <summary>
+    /// Hp업 버튼
+    /// </summary>
+    [Tooltip("Hp업 버튼")]
+    [SerializeField] Button hpUp;
+    /// <summary>
+    /// Mp업 버튼
+    /// </summary>
+    [Tooltip("Mp업 버튼")]
+    [SerializeField] Button mpUp;
+    /// <summary>
+    /// Atk업 버튼
+    /// </summary>
+    [Tooltip("Atk업 버튼")]
+    [SerializeField] Button atkUp;
+    /// <summary>
+    /// Def업 버튼
+    /// </summary>
+    [Tooltip("Def업 버튼")]
+    [SerializeField] Button defUp;
     [Header("몬스터 표시 창")]
     /// <summary>
     /// 왼쪽 몬스터 이름창
@@ -284,6 +315,7 @@ public class UiManager : MonoSingleton<UiManager>
         SetAtk(user.Atk);
         SetDef(user.Def);
         SetGold(user.Gold);
+        SetPoint(user.StatPoint);
     }
     /// <summary>
     /// inputName을 입력하면 플레이어 이름 텍스트에 표시함.
@@ -359,6 +391,13 @@ public class UiManager : MonoSingleton<UiManager>
     internal string SetGold(int gold)
     { return infoGold.text = $"{gold}원"; }
     /// <summary>
+    /// 정보창에 레벨업 포인트 띄워 줌
+    /// </summary>
+    /// <param name="point"></param>
+    /// <returns></returns>
+    internal string SetPoint(int point)
+    { return infoPoint.text = $"포인트 {point}"; }
+    /// <summary>
     /// 스테이지 UI활성 & 비활성
     /// </summary>
     /// <param name="isSet"></param>
@@ -382,6 +421,11 @@ public class UiManager : MonoSingleton<UiManager>
     /// </summary>
     void PlayerInfoDeactive()
     { playerInfoUi.SetActive(false); }
+    /// <summary>
+    /// 포인트 업 UI 활성화 & 비활성화
+    /// </summary>
+    internal void SetUpButton(bool isSet)
+    { UpUi.SetActive(isSet); }
     /// <summary>
     /// 몬스터가 1명이냐 2명이냐에 따라 UI표시를 바꿈
     /// </summary>
@@ -455,5 +499,9 @@ public class UiManager : MonoSingleton<UiManager>
             infoCloseButton.onClick.AddListener(PlayerInfoDeactive);
         else
             Debug.Log("인포 닫힘 버튼 없음");
+        hpUp.onClick.AddListener(GameMan.User.SetHpUp);
+        mpUp.onClick.AddListener(GameMan.User.SetMpUp);
+        atkUp.onClick.AddListener(GameMan.User.SetAtkUp);
+        defUp.onClick.AddListener(GameMan.User.SetDefUp);
     }
 }
