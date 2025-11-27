@@ -120,28 +120,22 @@ public class UiManager : MonoSingleton<UiManager>
     /// </summary>
     [Tooltip("사용자 정보 레벨 텍스트")]
     [SerializeField] TMP_Text infoLevelText;
-
+    /// <summary>
+    /// 사용자 정보 공격력 텍스트
+    /// </summary>
+    [Tooltip("사용자 정보 공격력 텍스트")]
+    [SerializeField] TMP_Text infoAtkText;
+    /// <summary>
+    /// 사용자 정보 방어력 텍스트
+    /// </summary>
+    [Tooltip("사용자 정보 방어력 텍스트")]
+    [SerializeField] TMP_Text infoDefText;
     /// <summary>
     /// 사용자 정보 UI 닫는 버튼
     /// </summary>
     [Tooltip("사용자 정보 UI 닫는 버튼")]
     [SerializeField] Button infoCloseButton;
     [Header("몬스터 표시 창")]
-    /// <summary>
-    /// 왼쪽 상자
-    /// </summary>
-    [Tooltip("왼쪽 상자")]
-    [SerializeField] GameObject leftCube;
-    /// <summary>
-    /// 중앙 상자
-    /// </summary>
-    [Tooltip("중앙 상자")]
-    [SerializeField] GameObject middleCube;
-    /// <summary>
-    /// 오른쪽 상자
-    /// </summary>
-    [Tooltip("오른쪽 상자")]
-    [SerializeField] GameObject rightCube;
     /// <summary>
     /// 왼쪽 몬스터 이름창
     /// </summary>
@@ -242,6 +236,20 @@ public class UiManager : MonoSingleton<UiManager>
     internal void UserUI(bool isSet)
     { userUi.SetActive(isSet); }
     /// <summary>
+    /// player클래스를 입력하면 자동으로 데이터를 UI창에 띄움
+    /// </summary>
+    /// <param name="user"></param>
+    internal void SetAllInfo(Player user)
+    {
+        NameText(user.nameIs);
+        LevelText(user.Level);
+        SetHp(user.CurrentHp, user.Hp);
+        SetMp(user.CurrentMp, user.Mp);
+        SetExp(user.CurrentExp, user.Exp);
+        SetAtk(user.Atk);
+        SetDef(user.Def);
+    }
+    /// <summary>
     /// inputName을 입력하면 플레이어 이름 텍스트에 표시함.
     /// </summary>
     /// <param name="inputName"></param>
@@ -263,6 +271,49 @@ public class UiManager : MonoSingleton<UiManager>
         infoLevelText.text = $"레벨 {inputLevel.ToString()}";
         return userLevel.text;
     }
+    /// <summary>
+    /// 플레이어 Hp표시
+    /// </summary>
+    /// <param name="currentHp"></param>
+    /// <param name="hp"></param>
+
+    internal string SetHp(int currentHp, int hp)
+    {
+        userHpBar.fillAmount = (float)(currentHp / hp);
+        return userHp.text = $"{currentHp}/{hp}";
+    }
+    /// <summary>
+    /// 플레이어 Mp표시
+    /// </summary>
+    /// <param name="currentMp"></param>
+    /// <param name="mp"></param>
+    internal string SetMp(int currentMp, int mp)
+    {
+        userMpBar.fillAmount = (float)(currentMp / mp);
+        return userMp.text = $"{currentMp}/{mp}";
+    }
+    /// <summary>
+    /// 플레이어 경험치 표시
+    /// </summary>
+    /// <param name="currentExp"></param>
+    /// <param name="exp"></param>
+    internal string SetExp(int currentExp, int exp)
+    {
+        userExpBar.fillAmount = (float)(currentExp / exp);
+        return userExp.text = $"{currentExp}/{exp}";
+    }
+    /// <summary>
+    /// 플레이어 공격력 표시
+    /// </summary>
+    /// <param name="atk"></param>
+    internal string SetAtk(int atk)
+    { return infoAtkText.text = $"공격력 {atk}"; }
+    /// <summary>
+    /// 플레이어 방어력 표시
+    /// </summary>
+    /// <param name="def"></param>
+    internal string SetDef(int def)
+    { return infoDefText.text = $"방어력 {def}"; }
     /// <summary>
     /// 스테이지 UI활성 & 비활성
     /// </summary>
@@ -292,25 +343,23 @@ public class UiManager : MonoSingleton<UiManager>
     /// </summary>
     /// <param name="isOne"></param>
     internal void MonsterSet(bool isOne)
-    { 
-        rightCube.SetActive(!isOne);
-        middleCube.SetActive(isOne);
-        leftCube.SetActive(!isOne);
-        rightInfo.SetActive(true);
-        leftInfo.SetActive(!isOne);
-        rightBar.SetActive(true);
-        leftBar.SetActive(!isOne);
+    {
+        leftInfo.SetActive(true);
+        rightInfo.SetActive(!isOne);
+        leftBar.SetActive(true);
+        rightBar.SetActive(!isOne);
     }
     /// <summary>
     /// 왼쪽 몬스터 정보창 띄우기
     /// </summary>
     internal void MonsterLeftInfo(Monster targetMon)
     {
+        Debug.Log("왼쪽 정보창");
         leftName.text = targetMon.nameIs;
         leftLevel.text = targetMon.Level.ToString();
         leftHpBar.fillAmount = (float)(targetMon.CurrentHp / targetMon.Hp);
         leftHpText.text = $"{targetMon.CurrentHp}/{targetMon.Hp}";
-        leftMpBar.fillAmount =(float)(targetMon.CurrentMp / targetMon.Mp);
+        leftMpBar.fillAmount = (float)(targetMon.CurrentMp / targetMon.Mp);
         leftMpText.text = $"{targetMon.CurrentMp}/{targetMon.Mp}";
     }
     /// <summary>
@@ -318,6 +367,7 @@ public class UiManager : MonoSingleton<UiManager>
     /// </summary>
     internal void MonsterRightInfo(Monster targetMon)
     {
+        Debug.Log("오른쪽 정보창");
         rightName.text = targetMon.nameIs;
         rightLevel.text = targetMon.Level.ToString();
         rightHpBar.fillAmount = (float)(targetMon.CurrentHp / targetMon.Hp);
@@ -325,21 +375,8 @@ public class UiManager : MonoSingleton<UiManager>
         rightMpBar.fillAmount = (float)(targetMon.CurrentMp / targetMon.Mp);
         rightMpText.text = $"{targetMon.CurrentMp}/{targetMon.Mp}";
     }
-    /// <summary>
-    /// 매니저 호출
-    /// </summary>
-    private void Awake()
-    {
-        if (gameManager == null)
-        {
-            gameManager = GetComponent<GameManager>();
-            if (gameManager == null)
-            { gameManager = gameObject.AddComponent<GameManager>(); }
-        }
-    }
     private void Start()
     {
-
         if (enterName != null)
             enterName.onClick.AddListener(GameMan.EnterName);
         else

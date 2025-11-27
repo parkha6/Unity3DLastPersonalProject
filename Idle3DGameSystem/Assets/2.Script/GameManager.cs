@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Net;
 using UnityEngine;
 
 /// <summary>
@@ -76,6 +75,10 @@ public class GameManager : MonoSingleton<GameManager>
     /// </summary>
     internal Stage Stage { get { return stage; } }
     /// <summary>
+    /// 몬스터 리스트 클래스 변수
+    /// </summary>
+    [SerializeField] private MonsterList monsterList;
+    /// <summary>
     /// 게임 시작 시점
     /// </summary>
     private void Start()
@@ -84,51 +87,28 @@ public class GameManager : MonoSingleton<GameManager>
     /// 게임 시작
     /// </summary>
     internal void StartGame()
-    {
-        SetName();
-        StartCoroutine(AutoBattle());
-    }
+    { SetName(); }
     /// <summary>
     /// 이름입력을 위한 세팅 함수
     /// </summary>
     private void SetName()
-    {
-        if (uiManager != null)
-            UiMan.TypeNameUI(true);
-        else
-            Debug.Log("UI매니저 없음");
-    }
+    { UiMan.TypeNameUI(true); }
     /// <summary>
     /// 이름값을 세팅하면 이름 UI가 꺼짐
     /// </summary>
     internal void EnterName()
     {
-        if (player != null && dataManager != null)
-            User.InputName(DataMan.InputPlayerName());
-        else if (player == null)
-            Debug.Log("플레이어 없음");
-        else if (dataManager == null)
-            Debug.Log("데이터 매니저 없음");
-        else
-            Debug.Log("플레이어와 데이터 매니저 둘다 없음.");
-        if (uiManager != null)
-        {
-            UiMan.TypeNameUI(false);
-            InitialUISetting();
-        }
-        else
-            Debug.Log("UI매니저 없음");
-
+        User.InputName(DataMan.InputPlayerName());
+        UiMan.TypeNameUI(false);
+        InitialUISetting();
+        StartBattle();
     }
     /// <summary>
     /// 초기 UI세팅
     /// </summary>
     void InitialUISetting()
     {
-        if (player != null && stage != null)
-            DrawPlayerUI();
-        else
-            Debug.Log("플레이어나 스테이지 없음");
+        DrawPlayerUI();
         UiMan.UserUI(true);
         UiMan.StageUI(true);
     }
@@ -137,9 +117,13 @@ public class GameManager : MonoSingleton<GameManager>
     /// </summary>
     void DrawPlayerUI()
     {
-        UiMan.NameText(User.nameIs);
-        UiMan.LevelText(User.Level);
+        UiMan.SetAllInfo(User);
         UiMan.StageText(stage.MainStage, stage.SubStage);
+    }
+    void StartBattle()
+    {
+        monsterList.StartBattle();
+        StartCoroutine(AutoBattle());
     }
     IEnumerator AutoBattle()
     {
@@ -164,28 +148,4 @@ public class GameManager : MonoSingleton<GameManager>
     /// </summary>
     void QuitGame()
     { }
-    /// <summary>
-    /// 싱글턴 세팅
-    /// </summary>
-    private void Awake()
-    {
-        if (uiManager == null)
-        {
-            uiManager = GetComponent<UiManager>();
-            if (uiManager == null)
-            { uiManager = gameObject.AddComponent<UiManager>(); }
-        }
-        if (dataManager == null)
-        {
-            dataManager = GetComponent<DataManager>();
-            if (dataManager == null)
-            { dataManager = gameObject.AddComponent<DataManager>(); }
-        }
-        if (player != null)
-        {
-            player = GetComponent<Player>();
-            if (player == null)
-            { player = gameObject.AddComponent<Player>(); }
-        }
-    }
 }

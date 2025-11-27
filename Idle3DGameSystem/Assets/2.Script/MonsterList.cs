@@ -7,14 +7,25 @@ using UnityEngine;
 public class MonsterList : MonoBehaviour
 {
     /// <summary>
+    /// 왼쪽 박스 프리팹
+    /// </summary>
+    [SerializeField] GameObject leftBox;
+    /// <summary>
+    /// 중앙 박스 프리팹
+    /// </summary>
+    [SerializeField] GameObject middleBox;
+    /// <summary>
+    /// 오른쪽 박스 프리팹
+    /// </summary>
+    [SerializeField] GameObject rightBox;
+    /// <summary>
     /// 몬스터 배열
     /// </summary>
     List<Monster> monsters = new List<Monster>();
     /// <summary>
     /// 몬스터 이름 데이터
     /// </summary>
-    string[] names = new string[] { "그냥 상자", "멍 때리는 상자", "아무튼 상자", "당황한 상자", "무거운 상자" };
-
+    string[] names = new string[] { "그냥 상자", "멍 때리는 상자", "아무튼 상자", "당황한 상자", "무거운 상자", "가벼운 상자" };
     internal void StartBattle()
     {
         byte amount = ChooseAmount();
@@ -25,10 +36,10 @@ public class MonsterList : MonoBehaviour
     /// </summary>
     byte ChooseAmount()
     {
-        byte result = (byte)Random.Range(0, 1);
-        if (result == 0)
+        byte result = (byte)Random.Range(1, 3);
+        if (result == 1)
         { UiManager.Instance.MonsterSet(true); }
-        else if (result == 1)
+        else if (result == 2)
         { UiManager.Instance.MonsterSet(false); }
         return result;
     }
@@ -38,16 +49,26 @@ public class MonsterList : MonoBehaviour
     /// <param name="num"></param>
     void SetMonster(byte num)
     {
-        for (int i = Consts.none; i < num; ++i)
+        Debug.Log("몬스터 세팅");
+        if (monsters.Count < num)
         {
-            if (monsters[num] == null)
+            for (int i = Consts.minValue; i <= num; ++i)
             {
-                monsters.Add(monsters[num]);
-                ChooseRandomInfo(monsters[num]);
-                if (num == 0)
-                { UiManager.Instance.MonsterLeftInfo(monsters[num]); }
-                else if (num == 1)
-                { UiManager.Instance.MonsterRightInfo(monsters[num]); }
+                GameObject boxPrefab = middleBox;
+                if (num == 1 && i == 1)
+                { boxPrefab = middleBox; }
+                else if (num == 2 && i == 1)
+                { boxPrefab = leftBox; }
+                else if (num == 2 && i == 2)
+                { boxPrefab = rightBox; }
+                GameObject newBox = Instantiate(boxPrefab);
+                Monster newMon = newBox.GetComponent<Monster>();
+                ChooseRandomInfo(newMon);
+                monsters.Add(newMon);
+                if (i == 1)
+                { UiManager.Instance.MonsterLeftInfo(newMon); }
+                else if (i == 2)
+                { UiManager.Instance.MonsterRightInfo(newMon); }
             }
         }
     }
@@ -57,14 +78,17 @@ public class MonsterList : MonoBehaviour
     /// <param name="targetMon"></param>
     void ChooseRandomInfo(Monster targetMon)
     {
-        SetName(targetMon.nameIs);
-        SetLevel(targetMon.Level);
-        SetStat(targetMon, targetMon.Atk);
-        SetStat(targetMon, targetMon.Def);
-        SetHp(targetMon);
-        SetMp(targetMon);
-        SetLargeStat(targetMon, targetMon.DropExp);
-        SetLargeStat(targetMon, targetMon.Gold);
+        targetMon.nameIs = SetName(targetMon.nameIs);
+        Debug.Log(targetMon.nameIs);
+        targetMon.Level = SetLevel(targetMon.Level);
+        targetMon.Atk = SetStat(targetMon, targetMon.Atk);
+        targetMon.Def = SetStat(targetMon, targetMon.Def);
+        targetMon.Hp = SetHp(targetMon);
+        targetMon.CurrentHp = targetMon.Hp;
+        targetMon.Mp = SetMp(targetMon);
+        targetMon.CurrentMp = targetMon.Mp;
+        targetMon.DropExp = SetLargeStat(targetMon, targetMon.DropExp);
+        targetMon.IncreaseGold(SetLargeStat(targetMon, targetMon.Gold));
     }
     /// <summary>
     /// 몬스터 이름 세팅 함수
@@ -135,7 +159,14 @@ public class MonsterList : MonoBehaviour
     {
         bool result = monsters.All<Monster>(monster => monster.IsDead == true);
         if (result)
-        { monsters.Clear(); }
+        {
+            foreach (Monster mon in monsters)
+            {
+                if (mon != null && mon.gameObject != null)
+                { Destroy(mon.gameObject); }
+            }
+            monsters.Clear();
+        }
         return result;
     }
 }

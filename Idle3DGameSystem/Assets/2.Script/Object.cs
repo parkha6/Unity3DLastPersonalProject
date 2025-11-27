@@ -260,7 +260,7 @@ class BattleUnit : Object
         private set
         {
             if (value <= Consts.none)
-            { value = Consts.minValue; }
+            { value = Consts.none; }
             gold = value;
         }
     }
