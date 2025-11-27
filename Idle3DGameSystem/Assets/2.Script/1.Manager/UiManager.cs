@@ -161,6 +161,11 @@ public class UiManager : MonoSingleton<UiManager>
     [Tooltip("사용자 정보 방어력 텍스트")]
     [SerializeField] TMP_Text infoDefText;
     /// <summary>
+    /// 사용자 정보 소지금 텍스트
+    /// </summary>
+    [Tooltip("사용자 정보 소지금 텍스트")]
+    [SerializeField] TMP_Text infoGold;
+    /// <summary>
     /// 사용자 정보 UI 닫는 버튼
     /// </summary>
     [Tooltip("사용자 정보 UI 닫는 버튼")]
@@ -278,6 +283,7 @@ public class UiManager : MonoSingleton<UiManager>
         SetExp(user.CurrentExp, user.Exp);
         SetAtk(user.Atk);
         SetDef(user.Def);
+        SetGold(user.Gold);
     }
     /// <summary>
     /// inputName을 입력하면 플레이어 이름 텍스트에 표시함.
@@ -350,6 +356,8 @@ public class UiManager : MonoSingleton<UiManager>
     /// <param name="def"></param>
     internal string SetDef(int def)
     { return infoDefText.text = $"방어력 {def}"; }
+    internal string SetGold(int gold)
+    { return infoGold.text = $"{gold}원"; }
     /// <summary>
     /// 스테이지 UI활성 & 비활성
     /// </summary>
@@ -392,7 +400,7 @@ public class UiManager : MonoSingleton<UiManager>
     {
         Debug.Log("왼쪽 정보창");
         leftName.text = targetMon.nameIs;
-        leftLevel.text = targetMon.Level.ToString();
+        leftLevel.text = $"레벨 {targetMon.Level}";
         leftHpBar.fillAmount = (float)targetMon.CurrentHp / (float)targetMon.Hp;
         leftHpText.text = $"{targetMon.CurrentHp}/{targetMon.Hp}";
         leftMpBar.fillAmount = (float)targetMon.CurrentMp / (float)targetMon.Mp;
@@ -416,7 +424,7 @@ public class UiManager : MonoSingleton<UiManager>
     {
         Debug.Log("오른쪽 정보창");
         rightName.text = targetMon.nameIs;
-        rightLevel.text = targetMon.Level.ToString();
+        rightLevel.text = $"레벨 {targetMon.Level}";
         rightHpBar.fillAmount = (float)targetMon.CurrentHp / (float)targetMon.Hp;
         rightHpText.text = $"{targetMon.CurrentHp}/{targetMon.Hp}";
         rightMpBar.fillAmount = (float)targetMon.CurrentMp / (float)targetMon.Mp;

@@ -170,7 +170,9 @@ public class MonsterList : MonoBehaviour
     int SetLargeStat(Monster targetMon, int targetStat)
     {
         int currentTier = GameManager.Instance.Stage.SubStage;
-        return targetStat = Random.Range(Consts.none, currentTier) * targetMon.Level;
+        targetStat = Random.Range(Consts.none, currentTier) * targetMon.Level;
+        targetStat *= Random.Range(Consts.minValue, Consts.plusStatPoint);
+        return targetStat;
     }
     internal bool AllAttack(Player player)
     {

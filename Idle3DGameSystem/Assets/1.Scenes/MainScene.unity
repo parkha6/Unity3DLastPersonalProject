@@ -497,6 +497,7 @@ MonoBehaviour:
   infoExpText: {fileID: 983186192}
   infoAtkText: {fileID: 5673880371387465214}
   infoDefText: {fileID: 3409055995321817254}
+  infoGold: {fileID: 1543126785}
   infoCloseButton: {fileID: 1031410513}
   leftInfo: {fileID: 1435119833}
   leftName: {fileID: 614255354}
@@ -569,6 +570,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelClass: {fileID: 208087188}
+  playerAnimator: {fileID: 1080093496}
 --- !u!114 &208087186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3036,6 +3038,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1080093495}
+  - component: {fileID: 1080093496}
   m_Layer: 0
   m_Name: PlayerUI
   m_TagString: Untagged
@@ -3061,6 +3064,27 @@ Transform:
   - {fileID: 6406486943893501360}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1080093496
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1080093494}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9f2ec67caee35ed49b4bf11376547c27, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1087769906
 GameObject:
   m_ObjectHideFlags: 0
@@ -3908,7 +3932,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "1\uC6D0"
+  m_text: "0\uC6D0"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a06d5406a7793ec409fd3dea52c72cae, type: 2}
   m_sharedMaterial: {fileID: -1411284085838102595, guid: a06d5406a7793ec409fd3dea52c72cae, type: 2}

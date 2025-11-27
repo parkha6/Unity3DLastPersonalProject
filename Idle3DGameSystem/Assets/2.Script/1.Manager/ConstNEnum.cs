@@ -31,7 +31,7 @@ class Consts
     /// <summary>
     /// 두번째 박스번호
     /// </summary>
-    internal const byte SecondMon = 1;
+    internal const byte secondMon = 1;
     /// <summary>
     /// 몬스터 2마리
     /// </summary>
@@ -47,5 +47,5 @@ class Consts
     /// <summary>
     /// 코루틴 대기 시간
     /// </summary>
-    internal const float waitingTime = 0.3f;
+    internal const float waitingTime = 0.1f;
 }

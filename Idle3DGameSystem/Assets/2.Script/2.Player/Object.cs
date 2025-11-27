@@ -272,7 +272,7 @@ class BattleUnit : Object
     internal int Gold
     {
         get { return gold; }
-        private set
+        set
         {
             if (value <= Consts.none)
             { value = Consts.none; }
@@ -284,7 +284,7 @@ class BattleUnit : Object
     /// </summary>
     /// <param name="plusGold"></param>
     /// <returns></returns>
-    internal int IncreaseGold(int plusGold)
+    internal virtual int IncreaseGold(int plusGold)
     { return Gold += plusGold; }
     /// <summary>
     /// 죽었으면 isDead를 true로 바꿔줌.

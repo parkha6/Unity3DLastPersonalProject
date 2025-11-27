@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 /// <summary>
 /// 플레이어 클래스
@@ -9,6 +10,11 @@ internal class Player : BattleUnit
     /// </summary>
     [Tooltip("레벨 클래스 넣는 변수")]
     [SerializeField] Level levelClass;
+    /// <summary>
+    /// 플레이어 맞는 애니메이션
+    /// </summary>
+    [Tooltip("플레이어 맞는 애니메이션")]
+    [SerializeField] Animator playerAnimator;
     /// <summary>
     /// 스텟포인트
     /// </summary>
@@ -58,8 +64,10 @@ internal class Player : BattleUnit
     {
         currentExp -= Exp;
         Level = levelClass.IncreaseLevel(Level);
+        exp += Consts.barStat;
         UiManager.Instance.LevelText(Level);
         statPoint += Consts.plusStatPoint;
+        UiManager.Instance.SetExp(CurrentExp, Exp);
     }
     /// <summary>
     /// 이름 입력 함수
@@ -83,9 +91,35 @@ internal class Player : BattleUnit
     /// </summary>
     /// <param name="otherDmg"></param>
     internal override void GetAttacked(int otherDmg)
+    {StartCoroutine(DamagedAnimation(otherDmg));}
+    /// <summary>
+    /// 맞는 애니메이션 재생용 코루틴
+    /// </summary>
+    /// <param name="otherDmg"></param>
+    /// <returns></returns>
+    IEnumerator DamagedAnimation(int otherDmg)
     {
-        GetDamaged(otherDmg);
-        UiManager.Instance.SetHp(CurrentHp, Hp);
-        Debug.Log($"플레이어 Hp 호출 체크 {CurrentHp}/{Hp}");
+        bool isStart = true;
+        while (isStart)
+        {
+            playerAnimator.SetBool("isDamaged", true);
+            GetDamaged(otherDmg);
+            UiManager.Instance.SetHp(CurrentHp, Hp);
+            Debug.Log($"플레이어 Hp 호출 체크 {CurrentHp}/{Hp}");
+            yield return new WaitForSeconds(Consts.waitingTime);
+            playerAnimator.SetBool("isDamaged", false);
+            isStart = false;
+        }
+    }
+    /// <summary>
+    /// 플레이어가 골드를 얻으면 UI
+    /// </summary>
+    /// <param name="plusGold"></param>
+    /// <returns></returns>
+    internal override int IncreaseGold(int plusGold)
+    {
+        Gold += plusGold;
+        UiManager.Instance.SetGold(Gold);
+        return Gold;
     }
 }

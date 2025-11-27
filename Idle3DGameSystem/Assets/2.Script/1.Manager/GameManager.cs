@@ -162,10 +162,11 @@ public class GameManager : MonoSingleton<GameManager>
         byte hitWho = (byte)Random.Range(0, monAmount);
         if (monAmount == Consts.twoMon)
         {
-            if (hitWho == Consts.SecondMon || (hitWho == Consts.firstMon && targetMon.IsDead))
+            if (hitWho == Consts.secondMon || (hitWho == Consts.firstMon && targetMon.IsDead))
             {
+                hitWho = Consts.secondMon;
                 targetMon = monsterList.TakeMonster(hitWho);
-                if (targetMon.IsDead)
+                if (hitWho == Consts.secondMon&&targetMon.IsDead)
                 {
                     hitWho = Consts.firstMon;
                     targetMon = monsterList.TakeMonster(hitWho);
@@ -187,7 +188,7 @@ public class GameManager : MonoSingleton<GameManager>
                 Debug.Log($"Hit Who 0 {hitWho}");
                 UiMan.MonsterLeftHp(targetMon.CurrentHp, targetMon.Hp);
             }
-            else if (hitWho == Consts.SecondMon)
+            else if (hitWho == Consts.secondMon)
             {
                 Debug.Log($"Hit Who 1 {hitWho}");
                 UiMan.MonsterRightHp(targetMon.CurrentHp, targetMon.Hp);
