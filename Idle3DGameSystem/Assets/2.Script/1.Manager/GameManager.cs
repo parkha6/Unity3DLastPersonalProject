@@ -138,9 +138,9 @@ public class GameManager : MonoSingleton<GameManager>
         while (!monsterList.CheckAllDead())
         {
             PlayerTurn();
-            yield return null;
+            yield return new WaitForSeconds(Consts.waitingTime);
             MonsterTurn();
-            yield return null;
+            yield return new WaitForSeconds(Consts.waitingTime);
         }
         if (monsterList.CheckAllDead())
         {
@@ -162,35 +162,36 @@ public class GameManager : MonoSingleton<GameManager>
         byte hitWho = (byte)Random.Range(0, monAmount);
         if (monAmount == Consts.twoMon)
         {
-            if (hitWho == Consts.SecondMon || targetMon.IsDead)
+            if (hitWho == Consts.secondMon || (hitWho == Consts.firstMon && targetMon.IsDead))
             {
+                hitWho = Consts.secondMon;
                 targetMon = monsterList.TakeMonster(hitWho);
-                if (targetMon.IsDead)
+                if (hitWho == Consts.secondMon&&targetMon.IsDead)
+                {
                     hitWho = Consts.firstMon;
-                targetMon = monsterList.TakeMonster(hitWho);
+                    targetMon = monsterList.TakeMonster(hitWho);
+                }
             }
         }
         //공격
+
         targetMon.GetAttacked(User.Attack());
         Debug.Log($"몬스터 남은 체력{targetMon.CurrentHp}");
         Debug.Log($"monAmount값{monAmount}");
         //결과를 UI에 갱신
         if (monAmount == Consts.minValue)
-        {
-            UiMan.MonsterLeftHp(targetMon.CurrentHp,targetMon.Hp);
-            targetMon.HitAnimation();
-        }
+        { UiMan.MonsterLeftHp(targetMon.CurrentHp, targetMon.Hp); }
         else if (monAmount == Consts.twoMon)
         {
             if (hitWho == Consts.firstMon)
             {
+                Debug.Log($"Hit Who 0 {hitWho}");
                 UiMan.MonsterLeftHp(targetMon.CurrentHp, targetMon.Hp);
-                targetMon.HitAnimation();
             }
-            else if (hitWho == Consts.SecondMon)
+            else if (hitWho == Consts.secondMon)
             {
+                Debug.Log($"Hit Who 1 {hitWho}");
                 UiMan.MonsterRightHp(targetMon.CurrentHp, targetMon.Hp);
-                targetMon.HitAnimation();
             }
         }
         //죽음체크

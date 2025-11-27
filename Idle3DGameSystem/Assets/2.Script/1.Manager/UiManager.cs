@@ -121,6 +121,36 @@ public class UiManager : MonoSingleton<UiManager>
     [Tooltip("사용자 정보 레벨 텍스트")]
     [SerializeField] TMP_Text infoLevelText;
     /// <summary>
+    /// 사용자 정보 Hp 바
+    /// </summary>
+    [Tooltip("사용자 정보 Hp 바")]
+    [SerializeField] Image infoHpBar;
+    /// <summary>
+    /// 사용자 정보 Hp 텍스트
+    /// </summary>
+    [Tooltip("사용자 정보 Hp 텍스트")]
+    [SerializeField] TMP_Text infoHpText;
+    /// <summary>
+    /// 사용자 정보 Mp 바
+    /// </summary>
+    [Tooltip("사용자 정보 Mp 바")]
+    [SerializeField] Image infoMpBar;
+    /// <summary>
+    /// 사용자 정보 Mp 텍스트
+    /// </summary>
+    [Tooltip("사용자 정보 Mp 텍스트")]
+    [SerializeField] TMP_Text infoMpText;
+    /// <summary>
+    /// 사용자 정보 Exp 바
+    /// </summary>
+    [Tooltip("사용자 정보 Exp 바")]
+    [SerializeField] Image infoExpBar;
+    /// <summary>
+    /// 사용자 정보 Exp 텍스트
+    /// </summary>
+    [Tooltip("사용자 정보 Exp 텍스트")]
+    [SerializeField] TMP_Text infoExpText;
+    /// <summary>
     /// 사용자 정보 공격력 텍스트
     /// </summary>
     [Tooltip("사용자 정보 공격력 텍스트")]
@@ -130,6 +160,11 @@ public class UiManager : MonoSingleton<UiManager>
     /// </summary>
     [Tooltip("사용자 정보 방어력 텍스트")]
     [SerializeField] TMP_Text infoDefText;
+    /// <summary>
+    /// 사용자 정보 소지금 텍스트
+    /// </summary>
+    [Tooltip("사용자 정보 소지금 텍스트")]
+    [SerializeField] TMP_Text infoGold;
     /// <summary>
     /// 사용자 정보 UI 닫는 버튼
     /// </summary>
@@ -248,6 +283,7 @@ public class UiManager : MonoSingleton<UiManager>
         SetExp(user.CurrentExp, user.Exp);
         SetAtk(user.Atk);
         SetDef(user.Def);
+        SetGold(user.Gold);
     }
     /// <summary>
     /// inputName을 입력하면 플레이어 이름 텍스트에 표시함.
@@ -280,6 +316,8 @@ public class UiManager : MonoSingleton<UiManager>
     internal string SetHp(int currentHp, int hp)
     {
         userHpBar.fillAmount = (float)currentHp / hp;
+        infoHpBar.fillAmount = (float)currentHp / hp;
+        infoHpText.text = $"{currentHp}/{hp}";
         return userHp.text = $"{currentHp}/{hp}";
     }
     /// <summary>
@@ -290,6 +328,8 @@ public class UiManager : MonoSingleton<UiManager>
     internal string SetMp(int currentMp, int mp)
     {
         userMpBar.fillAmount = (float)currentMp / (float)mp;
+        infoMpBar.fillAmount = (float)currentMp / (float)mp;
+        infoMpText.text = $"{currentMp}/{mp}";
         return userMp.text = $"{currentMp}/{mp}";
     }
     /// <summary>
@@ -300,6 +340,8 @@ public class UiManager : MonoSingleton<UiManager>
     internal string SetExp(int currentExp, int exp)
     {
         userExpBar.fillAmount = (float)currentExp / (float)exp;
+        infoExpBar.fillAmount = (float)currentExp / (float)exp;
+        infoExpText.text = $"{currentExp}/{exp}";
         return userExp.text = $"{currentExp}/{exp}";
     }
     /// <summary>
@@ -314,6 +356,8 @@ public class UiManager : MonoSingleton<UiManager>
     /// <param name="def"></param>
     internal string SetDef(int def)
     { return infoDefText.text = $"방어력 {def}"; }
+    internal string SetGold(int gold)
+    { return infoGold.text = $"{gold}원"; }
     /// <summary>
     /// 스테이지 UI활성 & 비활성
     /// </summary>
@@ -356,7 +400,7 @@ public class UiManager : MonoSingleton<UiManager>
     {
         Debug.Log("왼쪽 정보창");
         leftName.text = targetMon.nameIs;
-        leftLevel.text = targetMon.Level.ToString();
+        leftLevel.text = $"레벨 {targetMon.Level}";
         leftHpBar.fillAmount = (float)targetMon.CurrentHp / (float)targetMon.Hp;
         leftHpText.text = $"{targetMon.CurrentHp}/{targetMon.Hp}";
         leftMpBar.fillAmount = (float)targetMon.CurrentMp / (float)targetMon.Mp;
@@ -380,7 +424,7 @@ public class UiManager : MonoSingleton<UiManager>
     {
         Debug.Log("오른쪽 정보창");
         rightName.text = targetMon.nameIs;
-        rightLevel.text = targetMon.Level.ToString();
+        rightLevel.text = $"레벨 {targetMon.Level}";
         rightHpBar.fillAmount = (float)targetMon.CurrentHp / (float)targetMon.Hp;
         rightHpText.text = $"{targetMon.CurrentHp}/{targetMon.Hp}";
         rightMpBar.fillAmount = (float)targetMon.CurrentMp / (float)targetMon.Mp;

@@ -19,7 +19,7 @@ class Consts
     /// <summary>
     /// 서브 스테이지 끝
     /// </summary>
-    internal const byte endSubStage = 100;
+    internal const byte endSubStage = 10;
     /// <summary>
     /// 최고레벨
     /// </summary>
@@ -31,7 +31,7 @@ class Consts
     /// <summary>
     /// 두번째 박스번호
     /// </summary>
-    internal const byte SecondMon = 1;
+    internal const byte secondMon = 1;
     /// <summary>
     /// 몬스터 2마리
     /// </summary>
@@ -39,9 +39,13 @@ class Consts
     /// <summary>
     /// 스텟이 오를 수 있는 최고수치
     /// </summary>
-    internal const byte maxPlusStat = 5;
+    internal const byte plusStatPoint = 5;
     /// <summary>
     /// 체력 마력 경험치 보정용
     /// </summary>
     internal const byte barStat = 10;
+    /// <summary>
+    /// 코루틴 대기 시간
+    /// </summary>
+    internal const float waitingTime = 0.1f;
 }

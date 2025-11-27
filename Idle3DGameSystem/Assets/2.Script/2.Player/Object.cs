@@ -22,7 +22,7 @@ public class Object : MonoBehaviour
         {
             if (value <= Consts.none)
             { value = Consts.minValue; }
-            else if (value > Consts.maxLevel)
+            else if (value >= Consts.maxLevel)
             { value = Consts.maxLevel; }
             level = value;
         }
@@ -187,9 +187,18 @@ class BattleUnit : Object
     /// </summary>
     internal int Attack()
     { return damage = Atk; }
-
-    internal void GetAttacked(int otherDmg)
-    { CurrentHp = ReduceHp(Damaged(otherDmg)); }
+    /// <summary>
+    /// 외부호출용 데미지 함수
+    /// </summary>
+    /// <param name="otherDmg"></param>
+    internal virtual void GetAttacked(int otherDmg)
+    { GetDamaged(otherDmg); }
+    /// <summary>
+    /// Hp 배치용 함수
+    /// </summary>
+    /// <param name="otherDmg"></param>
+    protected void GetDamaged(int otherDmg)
+    { ReduceHp(Damaged(otherDmg)); }
     /// <summary>
     /// 맞고 남은 체력를 돌려줌
     /// </summary>
@@ -202,7 +211,7 @@ class BattleUnit : Object
         {
             Debug.Log($"남은 공격력{otherDmg}");
             Debug.Log($"{nameIs}방어 성공");
-            return Consts.none;
+            return otherDmg = Consts.none;
         }
         else
         { return otherDmg; }
@@ -213,15 +222,20 @@ class BattleUnit : Object
     /// </summary>
     /// <param name="hpDmg"></param>
     /// <returns></returns>
-    protected int ReduceHp(int hpDmg)
+    protected void ReduceHp(int hpDmg)
     {
-        CurrentHp -= hpDmg;
-        if (CurrentHp <= Consts.none)
+        Debug.Log($"들어온 데미지{hpDmg}");
+        Debug.Log($"현재 Hp{CurrentHp}");
+        if (hpDmg >= 0)
         {
-            CurrentHp = Consts.dead;
-            Dead();
+            CurrentHp -= hpDmg;
+            if (CurrentHp <= Consts.none)
+            {
+                CurrentHp = Consts.dead;
+                Dead();
+            }
         }
-        return CurrentHp;
+        Debug.Log($"피격 후 Hp{CurrentHp}");
     }
     /// <summary>
     /// usedMp에 사용mp값을 입력하면 기술을 쓸수 있는지 없는지 판단해서 돌려준다.
@@ -258,7 +272,7 @@ class BattleUnit : Object
     internal int Gold
     {
         get { return gold; }
-        private set
+        set
         {
             if (value <= Consts.none)
             { value = Consts.none; }
@@ -270,17 +284,12 @@ class BattleUnit : Object
     /// </summary>
     /// <param name="plusGold"></param>
     /// <returns></returns>
-    internal int IncreaseGold(int plusGold)
+    internal virtual int IncreaseGold(int plusGold)
     { return Gold += plusGold; }
-    /// <summary>
-    /// minusGold만큼 골드 값 감소
-    /// </summary>
-    /// <param name="minusGold"></param>
-    /// <returns></returns>
     /// <summary>
     /// 죽었으면 isDead를 true로 바꿔줌.
     /// </summary>
-    protected void Dead()
+    protected virtual void Dead()
     { isDead = true; }
     internal int DecreaseGold(int minusGold)
     { return Gold -= minusGold; }
@@ -288,27 +297,8 @@ class BattleUnit : Object
     /// 재시작용 체력회복 함수
     /// </summary>
     internal void StartAgain()
-    { CurrentHp = Hp; }
-}
-/// <summary>
-/// 레벨업 관련 클래스
-/// </summary>
-class Level
-{
-    /// <summary>
-    /// 현재 레벨을 넣으면 1 오른다.
-    /// </summary>
-    /// <param name="currentLevel"></param>
-    /// <returns></returns>
-    int IncreaseLevel(int currentLevel)
-    { return ++currentLevel; }
-    /// <summary>
-    /// 현재값과 더하려는 값을 넣으면 더한 값을 리턴한다.
-    /// 공격력 증가, 방어력 증가용.
-    /// </summary>
-    /// <param name="currentValue"></param>
-    /// <param name="plusValue"></param>
-    /// <returns></returns>
-    int IncreaseAnything(int currentValue, int plusValue)
-    { return currentValue + plusValue; }
+    {
+        CurrentHp = Hp;
+        isDead = false;
+    }
 }
