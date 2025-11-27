@@ -48,4 +48,8 @@ class Consts
     /// 코루틴 대기 시간
     /// </summary>
     internal const float waitingTime = 0.1f;
+    /// <summary>
+    /// int 최대값
+    /// </summary>
+    internal const int maxInt = 2147483647;
 }

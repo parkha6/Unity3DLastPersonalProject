@@ -166,10 +166,41 @@ public class UiManager : MonoSingleton<UiManager>
     [Tooltip("사용자 정보 소지금 텍스트")]
     [SerializeField] TMP_Text infoGold;
     /// <summary>
+    /// 사용자 정보 레벨업 포인트 텍스트
+    /// </summary>
+    [Tooltip("사용자 정보 레벨업 포인트 텍스트")]
+    [SerializeField] TMP_Text infoPoint;
+    /// <summary>
     /// 사용자 정보 UI 닫는 버튼
     /// </summary>
     [Tooltip("사용자 정보 UI 닫는 버튼")]
     [SerializeField] Button infoCloseButton;
+    [Header("포인트 업 버튼")]
+    /// <summary>
+    /// 버튼 UI
+    /// </summary>
+    [Tooltip("버튼 UI")]
+    [SerializeField] GameObject UpUi;
+    /// <summary>
+    /// Hp업 버튼
+    /// </summary>
+    [Tooltip("Hp업 버튼")]
+    [SerializeField] Button hpUp;
+    /// <summary>
+    /// Mp업 버튼
+    /// </summary>
+    [Tooltip("Mp업 버튼")]
+    [SerializeField] Button mpUp;
+    /// <summary>
+    /// Atk업 버튼
+    /// </summary>
+    [Tooltip("Atk업 버튼")]
+    [SerializeField] Button atkUp;
+    /// <summary>
+    /// Def업 버튼
+    /// </summary>
+    [Tooltip("Def업 버튼")]
+    [SerializeField] Button defUp;
     [Header("몬스터 표시 창")]
     /// <summary>
     /// 왼쪽 몬스터 이름창
@@ -252,7 +283,28 @@ public class UiManager : MonoSingleton<UiManager>
     /// </summary>
     [Tooltip("오른쪽 몬스터 MP 텍스트")]
     [SerializeField] TMP_Text rightMpText;
-
+    [Header("사망시 패널티 UI")]
+    /// <summary>
+    /// 메세지 UI
+    /// </summary>
+    [Tooltip("메세지 UI")]
+    [SerializeField] GameObject messageUi;
+    /// <summary>
+    /// 메세지 텍스트
+    /// </summary>
+    [Tooltip("메세지 텍스트")]
+    [SerializeField] TMP_Text messageText;
+    /// <summary>
+    /// 카운트 다운 텍스트
+    /// </summary>
+    [Tooltip("카운트 다운 텍스트")]
+    [SerializeField] TMP_Text countdownText;
+    [Header("종료 버튼")]
+    /// <summary>
+    /// 게임 종료 버튼
+    /// </summary>
+    [Tooltip("게임 종료 버튼")]
+    [SerializeField] Button exitButton;
     /// <summary>
     /// 이름 입력창 활성 & 비활성
     /// </summary>
@@ -284,6 +336,7 @@ public class UiManager : MonoSingleton<UiManager>
         SetAtk(user.Atk);
         SetDef(user.Def);
         SetGold(user.Gold);
+        SetPoint(user.StatPoint);
     }
     /// <summary>
     /// inputName을 입력하면 플레이어 이름 텍스트에 표시함.
@@ -359,6 +412,13 @@ public class UiManager : MonoSingleton<UiManager>
     internal string SetGold(int gold)
     { return infoGold.text = $"{gold}원"; }
     /// <summary>
+    /// 정보창에 레벨업 포인트 띄워 줌
+    /// </summary>
+    /// <param name="point"></param>
+    /// <returns></returns>
+    internal string SetPoint(int point)
+    { return infoPoint.text = $"포인트 {point}"; }
+    /// <summary>
     /// 스테이지 UI활성 & 비활성
     /// </summary>
     /// <param name="isSet"></param>
@@ -382,6 +442,43 @@ public class UiManager : MonoSingleton<UiManager>
     /// </summary>
     void PlayerInfoDeactive()
     { playerInfoUi.SetActive(false); }
+    /// <summary>
+    /// 포인트 업 UI 활성화 & 비활성화
+    /// </summary>
+    internal void SetUpButton(bool isSet)
+    { UpUi.SetActive(isSet); }
+    /// <summary>
+    /// int가 최대일때 체력 버튼 비활성
+    /// </summary>
+    internal void DeactiveHpUp()
+    {
+        GameObject hpObject = hpUp.gameObject;
+        hpObject.SetActive(false);
+    }
+    /// <summary>
+    /// int가 최대일때 마력버튼 비활성
+    /// </summary>
+    internal void DeactiveMpUp()
+    {
+        GameObject mpObject = mpUp.gameObject;
+        mpObject.SetActive(false);
+    }
+    /// <summary>
+    /// int가 최대일때 공격력버튼 비활성
+    /// </summary>
+    internal void DeactiveAtkUp()
+    {
+        GameObject atkObject = atkUp.gameObject;
+        atkObject.SetActive(false);
+    }
+    /// <summary>
+    /// int가 최대일때 방어력버튼 비활성
+    /// </summary>
+    internal void DeactiveDefUp()
+    {
+        GameObject defObject = defUp.gameObject;
+        defObject.SetActive(false);
+    }
     /// <summary>
     /// 몬스터가 1명이냐 2명이냐에 따라 UI표시를 바꿈
     /// </summary>
@@ -441,6 +538,27 @@ public class UiManager : MonoSingleton<UiManager>
         rightHpBar.fillAmount = (float)currentHp / (float)hp;
         return rightHpText.text = $"{currentHp}/{hp}";
     }
+    /// <summary>
+    /// 메세지 창 활성 & 비활성
+    /// </summary>
+    /// <param name="isSet"></param>
+    internal void SetMessageUi(bool isSet)
+    { messageUi.SetActive(isSet); }
+    /// <summary>
+    /// 경고창 메세지 바꾸는 함수
+    /// </summary>
+    /// <param name="message"></param>
+    internal void SetMessageText(string message)
+    { messageText.text = message; }
+    /// <summary>
+    /// 카운트다운 표시 메세지
+    /// </summary>
+    /// <param name="countdown"></param>
+    internal void SetCountdown(byte countdown)
+    { countdownText.text = $"{countdown}초"; }
+    /// <summary>
+    /// 시작함수 버튼 세팅
+    /// </summary>
     private void Start()
     {
         if (enterName != null)
@@ -455,5 +573,10 @@ public class UiManager : MonoSingleton<UiManager>
             infoCloseButton.onClick.AddListener(PlayerInfoDeactive);
         else
             Debug.Log("인포 닫힘 버튼 없음");
+        hpUp.onClick.AddListener(GameMan.User.SetHpUp);
+        mpUp.onClick.AddListener(GameMan.User.SetMpUp);
+        atkUp.onClick.AddListener(GameMan.User.SetAtkUp);
+        defUp.onClick.AddListener(GameMan.User.SetDefUp);
+        exitButton.onClick.AddListener(GameMan.QuitGame);
     }
 }

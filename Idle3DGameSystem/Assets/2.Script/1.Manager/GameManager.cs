@@ -139,7 +139,13 @@ public class GameManager : MonoSingleton<GameManager>
         {
             PlayerTurn();
             yield return new WaitForSeconds(Consts.waitingTime);
-            MonsterTurn();
+            bool check = MonsterTurn();
+            Debug.Log(check);
+            if (check)
+            {
+                yield return StartCoroutine(Resting());
+                User.StartAgain();
+            }
             yield return new WaitForSeconds(Consts.waitingTime);
         }
         if (monsterList.CheckAllDead())
@@ -148,8 +154,6 @@ public class GameManager : MonoSingleton<GameManager>
             UiMan.StageText(stage.MainStage, stage.SubStage);
             StartBattle();
         }
-        else if (User.IsDead)
-        { StartBattle(); }
     }
     /// <summary>
     /// 플레이어 턴에 몬스터를 팬다.
@@ -166,7 +170,7 @@ public class GameManager : MonoSingleton<GameManager>
             {
                 hitWho = Consts.secondMon;
                 targetMon = monsterList.TakeMonster(hitWho);
-                if (hitWho == Consts.secondMon&&targetMon.IsDead)
+                if (hitWho == Consts.secondMon && targetMon.IsDead)
                 {
                     hitWho = Consts.firstMon;
                     targetMon = monsterList.TakeMonster(hitWho);
@@ -174,7 +178,6 @@ public class GameManager : MonoSingleton<GameManager>
             }
         }
         //공격
-
         targetMon.GetAttacked(User.Attack());
         Debug.Log($"몬스터 남은 체력{targetMon.CurrentHp}");
         Debug.Log($"monAmount값{monAmount}");
@@ -201,14 +204,37 @@ public class GameManager : MonoSingleton<GameManager>
     /// <summary>
     /// 몬스터 턴
     /// </summary>
-    void MonsterTurn()
+    bool MonsterTurn()
+    { return monsterList.AllAttack(User); }
+    /// <summary>
+    /// 죽었을때 패널티를 만드려고 넣은 함수
+    /// </summary>
+    IEnumerator Resting()
     {
-        if (monsterList.AllAttack(User))
-        { User.StartAgain(); }
+        bool isStart = true;
+        while (isStart)
+        {
+            UiManager.Instance.SetMessageUi(true);
+            UiManager.Instance.SetCountdown(3);
+            yield return new WaitForSeconds(Consts.minValue);
+            UiManager.Instance.SetCountdown(2);
+            yield return new WaitForSeconds(Consts.minValue);
+            UiManager.Instance.SetCountdown(1);
+            yield return new WaitForSeconds(Consts.minValue);
+            UiManager.Instance.SetMessageUi(false);
+            isStart = false;
+        }
     }
+
     /// <summary>
     /// 게임 종료
     /// </summary>
-    void QuitGame()
-    { }
+    internal void QuitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else  
+        Application.Quit();
+#endif
+    }
 }
