@@ -174,12 +174,18 @@ public class MonsterList : MonoBehaviour
         targetStat *= Random.Range(Consts.minValue, Consts.plusStatPoint);
         return targetStat;
     }
+    /// <summary>
+    /// 몬스터가 한마리씩 공격한 뒤 플레이어가 죽었는지 안죽었는지 불값을 반환
+    /// </summary>
+    /// <param name="player"></param>
+    /// <returns></returns>
     internal bool AllAttack(Player player)
     {
         StartCoroutine(AttackOneByOne(player));
         if (player.IsDead)
-        { return true; }
-        return false;
+            return true;
+        else
+            return false;
     }
     /// <summary>
     /// 한마리씩 때리기 위한 코루틴

@@ -283,7 +283,22 @@ public class UiManager : MonoSingleton<UiManager>
     /// </summary>
     [Tooltip("오른쪽 몬스터 MP 텍스트")]
     [SerializeField] TMP_Text rightMpText;
-
+    [Header("사망시 패널티 UI")]
+    /// <summary>
+    /// 메세지 UI
+    /// </summary>
+    [Tooltip("메세지 UI")]
+    [SerializeField] GameObject messageUi;
+    /// <summary>
+    /// 메세지 텍스트
+    /// </summary>
+    [Tooltip("메세지 텍스트")]
+    [SerializeField] TMP_Text messageText;
+    /// <summary>
+    /// 카운트 다운 텍스트
+    /// </summary>
+    [Tooltip("카운트 다운 텍스트")]
+    [SerializeField] TMP_Text countdownText;
     /// <summary>
     /// 이름 입력창 활성 & 비활성
     /// </summary>
@@ -485,6 +500,27 @@ public class UiManager : MonoSingleton<UiManager>
         rightHpBar.fillAmount = (float)currentHp / (float)hp;
         return rightHpText.text = $"{currentHp}/{hp}";
     }
+    /// <summary>
+    /// 메세지 창 활성 & 비활성
+    /// </summary>
+    /// <param name="isSet"></param>
+    internal void SetMessageUi(bool isSet)
+    { messageUi.SetActive(isSet); }
+    /// <summary>
+    /// 경고창 메세지 바꾸는 함수
+    /// </summary>
+    /// <param name="message"></param>
+    internal void SetMessageText(string message)
+    { messageText.text = message; }
+    /// <summary>
+    /// 카운트다운 표시 메세지
+    /// </summary>
+    /// <param name="countdown"></param>
+    internal void SetCountdown(byte countdown)
+    { countdownText.text = $"{countdown}초"; }
+    /// <summary>
+    /// 시작함수 버튼 세팅
+    /// </summary>
     private void Start()
     {
         if (enterName != null)
