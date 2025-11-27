@@ -289,7 +289,7 @@ class BattleUnit : Object
     /// <summary>
     /// 죽었으면 isDead를 true로 바꿔줌.
     /// </summary>
-    protected void Dead()
+    protected virtual void Dead()
     { isDead = true; }
     internal int DecreaseGold(int minusGold)
     { return Gold -= minusGold; }
