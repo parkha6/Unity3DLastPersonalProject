@@ -187,8 +187,17 @@ class BattleUnit : Object
     /// </summary>
     internal int Attack()
     { return damage = Atk; }
-
-    internal void GetAttacked(int otherDmg)
+    /// <summary>
+    /// 외부호출용 데미지 함수
+    /// </summary>
+    /// <param name="otherDmg"></param>
+    internal virtual void GetAttacked(int otherDmg)
+    { GetDamaged(otherDmg); }
+    /// <summary>
+    /// Hp 배치용 함수
+    /// </summary>
+    /// <param name="otherDmg"></param>
+    protected void GetDamaged(int otherDmg)
     { CurrentHp = ReduceHp(Damaged(otherDmg)); }
     /// <summary>
     /// 맞고 남은 체력를 돌려줌

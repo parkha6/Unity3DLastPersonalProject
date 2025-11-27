@@ -19,7 +19,7 @@ class Consts
     /// <summary>
     /// 서브 스테이지 끝
     /// </summary>
-    internal const byte endSubStage = 100;
+    internal const byte endSubStage = 10;
     /// <summary>
     /// 최고레벨
     /// </summary>

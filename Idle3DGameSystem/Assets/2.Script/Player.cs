@@ -63,8 +63,15 @@ internal class Player : BattleUnit
     /// <returns></returns>
     int IncreaseWholeMp(int plusMp)
     { return mp += plusMp; }
+    /// <summary>
+    /// 이름 입력 함수
+    /// </summary>
+    /// <param name="inputName"></param>
     internal void InputName(string inputName)
     { nameIs = inputName; }
+    /// <summary>
+    /// 초기 플레이어 스텟 세팅
+    /// </summary>
     internal void InitialStatSetting()
     {
         Hp = Level * Consts.barStat;
@@ -72,5 +79,15 @@ internal class Player : BattleUnit
         exp = Level * Consts.barStat;
         Atk = Random.Range(Consts.minValue, Consts.maxPlusStat);
         Def = Random.Range(Consts.minValue, Consts.maxPlusStat);
+    }
+    /// <summary>
+    /// 플레이어는 여기서 Hp가 UI창에 반영됨
+    /// </summary>
+    /// <param name="otherDmg"></param>
+    internal override void GetAttacked(int otherDmg)
+    { 
+        GetDamaged(otherDmg);
+        UiManager.Instance.SetHp(CurrentHp,Hp);
+        Debug.Log($"플레이어 Hp 호출 체크 {CurrentHp}/{Hp}");
     }
 }
