@@ -7,24 +7,24 @@ public class Stage : MonoBehaviour
     /// <summary>
     /// 메인 스테이지
     /// </summary>
-    int mainStage = 1;
+    int mainStage = Consts.minValue;
     /// <summary>
     /// 메인스테이지 음수 방지 프로퍼티
     /// </summary>
     internal int MainStage
     {
         get { return mainStage; }
-         private set
+        private set
         {
-            if (value <= Consts.noStage)
-            { value = Consts.firstStage; }
+            if (value <= Consts.none)
+            { value = Consts.minValue; }
             mainStage = value;
         }
     }
     /// <summary>
     /// 서브 스테이지
     /// </summary>
-    int subStage = 1;
+    int subStage = Consts.minValue;
     /// <summary>
     /// 서브스테이지 음수 방지+ 자동 스테이지 업용 프로퍼티
     /// </summary>
@@ -33,12 +33,12 @@ public class Stage : MonoBehaviour
         get { return subStage; }
         private set
         {
-            if (value <= Consts.noStage)
-            { value = Consts.firstStage; }
+            if (value <= Consts.none)
+            { value = Consts.minValue; }
             else if (value >= Consts.endSubStage)
             {
                 ++MainStage;
-                value = Consts.firstStage;
+                value = Consts.minValue;
             }
             subStage = value;
         }

@@ -126,6 +126,104 @@ public class UiManager : MonoSingleton<UiManager>
     /// </summary>
     [Tooltip("사용자 정보 UI 닫는 버튼")]
     [SerializeField] Button infoCloseButton;
+    [Header("몬스터 표시 창")]
+    /// <summary>
+    /// 왼쪽 상자
+    /// </summary>
+    [Tooltip("왼쪽 상자")]
+    [SerializeField] GameObject leftCube;
+    /// <summary>
+    /// 중앙 상자
+    /// </summary>
+    [Tooltip("중앙 상자")]
+    [SerializeField] GameObject middleCube;
+    /// <summary>
+    /// 오른쪽 상자
+    /// </summary>
+    [Tooltip("오른쪽 상자")]
+    [SerializeField] GameObject rightCube;
+    /// <summary>
+    /// 왼쪽 몬스터 이름창
+    /// </summary>
+    [Tooltip("왼쪽 몬스터 이름창")]
+    [SerializeField] GameObject leftInfo;
+    /// <summary>
+    /// 왼쪽 몬스터 이름 텍스트
+    /// </summary>
+    [Tooltip("왼쪽 몬스터 이름 텍스트")]
+    [SerializeField] TMP_Text leftName;
+    /// <summary>
+    /// 왼쪽 몬스터 레벨 텍스트
+    /// </summary>
+    [Tooltip("왼쪽 몬스터 레벨 텍스트")]
+    [SerializeField] TMP_Text leftLevel;
+    /// <summary>
+    /// 오른쪽 몬스터 이름창
+    /// </summary>
+    [Tooltip("오른쪽 몬스터 이름창")]
+    [SerializeField] GameObject rightInfo;
+    /// <summary>
+    /// 오른쪽 몬스터 이름 텍스트
+    /// </summary>
+    [Tooltip("오른쪽 몬스터 이름 텍스트")]
+    [SerializeField] TMP_Text rightName;
+    /// <summary>
+    /// 오른쪽 몬스터 레벨 텍스트
+    /// </summary>
+    [Tooltip("오른쪽 몬스터 레벨 텍스트")]
+    [SerializeField] TMP_Text rightLevel;
+    /// <summary>
+    /// 왼쪽 체력바
+    /// </summary>
+    [Tooltip("왼쪽 체력바")]
+    [SerializeField] GameObject leftBar;
+    /// <summary>
+    /// 왼쪽 몬스터 HP바 이미지
+    /// </summary>
+    [Tooltip("왼쪽 몬스터 HP바 이미지")]
+    [SerializeField] Image leftHpBar;
+    /// <summary>
+    /// 왼쪽 몬스터 HP 텍스트
+    /// </summary>
+    [Tooltip("왼쪽 몬스터 HP 텍스트")]
+    [SerializeField] TMP_Text leftHpText;
+    /// <summary>
+    /// 왼쪽 몬스터 MP바 이미지
+    /// </summary>
+    [Tooltip("왼쪽 몬스터 HP바 이미지")]
+    [SerializeField] Image leftMpBar;
+    /// <summary>
+    /// 왼쪽 몬스터 MP 텍스트
+    /// </summary>
+    [Tooltip("왼쪽 몬스터 MP 텍스트")]
+    [SerializeField] TMP_Text leftMpText;
+
+    /// <summary>
+    /// 오른쪽 체력바
+    /// </summary>
+    [Tooltip("오른쪽 체력바")]
+    [SerializeField] GameObject rightBar;
+    /// <summary>
+    /// 오른쪽 몬스터 HP바 이미지
+    /// </summary>
+    [Tooltip("오른쪽 몬스터 HP바 이미지")]
+    [SerializeField] Image rightHpBar;
+    /// <summary>
+    /// 오른쪽 몬스터 HP 텍스트
+    /// </summary>
+    [Tooltip("오른쪽 몬스터 HP 텍스트")]
+    [SerializeField] TMP_Text rightHpText;
+    /// <summary>
+    /// 오른쪽 몬스터 MP바 이미지
+    /// </summary>
+    [Tooltip("오른쪽 몬스터 HP바 이미지")]
+    [SerializeField] Image rightMpBar;
+    /// <summary>
+    /// 오른쪽 몬스터 MP 텍스트
+    /// </summary>
+    [Tooltip("오른쪽 몬스터 MP 텍스트")]
+    [SerializeField] TMP_Text rightMpText;
+
     /// <summary>
     /// 이름 입력창 활성 & 비활성
     /// </summary>
@@ -189,6 +287,44 @@ public class UiManager : MonoSingleton<UiManager>
     /// </summary>
     void PlayerInfoDeactive()
     { playerInfoUi.SetActive(false); }
+    /// <summary>
+    /// 몬스터가 1명이냐 2명이냐에 따라 UI표시를 바꿈
+    /// </summary>
+    /// <param name="isOne"></param>
+    internal void MonsterSet(bool isOne)
+    { 
+        rightCube.SetActive(!isOne);
+        middleCube.SetActive(isOne);
+        leftCube.SetActive(!isOne);
+        rightInfo.SetActive(true);
+        leftInfo.SetActive(!isOne);
+        rightBar.SetActive(true);
+        leftBar.SetActive(!isOne);
+    }
+    /// <summary>
+    /// 왼쪽 몬스터 정보창 띄우기
+    /// </summary>
+    internal void MonsterLeftInfo(Monster targetMon)
+    {
+        leftName.text = targetMon.nameIs;
+        leftLevel.text = targetMon.Level.ToString();
+        leftHpBar.fillAmount = (float)(targetMon.CurrentHp / targetMon.Hp);
+        leftHpText.text = $"{targetMon.CurrentHp}/{targetMon.Hp}";
+        leftMpBar.fillAmount =(float)(targetMon.CurrentMp / targetMon.Mp);
+        leftMpText.text = $"{targetMon.CurrentMp}/{targetMon.Mp}";
+    }
+    /// <summary>
+    /// 오른쪽 몬스터 정보창 띄우기
+    /// </summary>
+    internal void MonsterRightInfo(Monster targetMon)
+    {
+        rightName.text = targetMon.nameIs;
+        rightLevel.text = targetMon.Level.ToString();
+        rightHpBar.fillAmount = (float)(targetMon.CurrentHp / targetMon.Hp);
+        rightHpText.text = $"{targetMon.CurrentHp}/{targetMon.Hp}";
+        rightMpBar.fillAmount = (float)(targetMon.CurrentMp / targetMon.Mp);
+        rightMpText.text = $"{targetMon.CurrentMp}/{targetMon.Mp}";
+    }
     /// <summary>
     /// 매니저 호출
     /// </summary>

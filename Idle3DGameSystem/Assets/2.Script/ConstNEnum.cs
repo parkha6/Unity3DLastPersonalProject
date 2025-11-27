@@ -5,23 +5,23 @@ using UnityEngine;
 class Consts
 {
     /// <summary>
-    /// 데미지가 0일때 쓰는 변수
+    /// 뭐든 없음
     /// </summary>
-    internal const byte noDamage = 0;
+    internal const byte none = 0;
     /// <summary>
     /// 죽음상태에 쓰는 변수
     /// </summary>
     internal const byte dead = 0;
     /// <summary>
-    /// 스테이지가 없을때
-    /// </summary>
-    internal const byte noStage = 0;
-    /// <summary>
     /// 스테이지 시작
     /// </summary>
-    internal const byte firstStage = 1;
+    internal const byte minValue = 1;
     /// <summary>
     /// 서브 스테이지 끝
     /// </summary>
     internal const byte endSubStage = 100;
+    /// <summary>
+    /// 최고레벨
+    /// </summary>
+    internal const byte maxLevel = 255;
 }

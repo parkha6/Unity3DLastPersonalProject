@@ -11,7 +11,7 @@ public class Object : MonoBehaviour
     /// <summary>
     /// 레벨 변수
     /// </summary>
-    protected byte level = 1;
+    protected byte level = Consts.minValue;
     /// <summary>
     /// 255이상과 음수값을 막기 위한 레벨 프로퍼티
     /// </summary>
@@ -20,21 +20,47 @@ public class Object : MonoBehaviour
         get { return level; }
         set
         {
-            if (value <= 0)
-            { value = 1; }
-            else if (value > 255)
-            { value = 255; }
+            if (value <= Consts.none)
+            { value = Consts.minValue; }
+            else if (value > Consts.maxLevel)
+            { value = Consts.maxLevel; }
             level = value;
         }
     }
     /// <summary>
     /// 공격력 변수
     /// </summary>
-    protected int atk = 1;
+    protected int atk = Consts.minValue;
+    /// <summary>
+    /// 공격력 프로퍼티
+    /// </summary>
+    internal int Atk
+    {
+        get { return atk; }
+        set
+        {
+            if (value <= Consts.none)
+            { value = Consts.minValue; }
+            atk = value;
+        }
+    }
     /// <summary>
     /// 방어력 변수
     /// </summary>
-    protected int def = 1;
+    protected int def = Consts.minValue;
+    /// <summary>
+    /// 방어력 프로퍼티
+    /// </summary>
+    internal int Def
+    {
+        get { return def; }
+        set
+        {
+            if (value <= Consts.none)
+            { value = Consts.minValue; }
+            def = value;
+        }
+    }
 }
 class item : Object
 {
@@ -46,11 +72,11 @@ class item : Object
     /// <summary>
     /// 아이템의 가격
     /// </summary>
-    int price = 0;
+    int price = Consts.none;
     /// <summary>
     /// 레벨업 시 소모골드
     /// </summary>
-    int lvUpPrice = 0;
+    int lvUpPrice = Consts.minValue;
     /// <summary>
     /// 장착여부 확인
     /// </summary>
@@ -77,41 +103,98 @@ class BattleUnit : Object
     /// <summary>
     /// 총 체력
     /// </summary>
-    protected int hp = 1;
+    protected int hp = Consts.minValue;
+    /// <summary>
+    /// 총 체력 프로퍼티
+    /// </summary>
+    internal int Hp
+    {
+        get { return hp; }
+        set
+        {
+            if (value <= Consts.none)
+            { value = Consts.minValue; }
+            hp = value;
+        }
+    }
     /// <summary>
     /// 현재 체력
     /// </summary>
-    protected int currentHp = 1;
+    protected int currentHp = Consts.minValue;
+    /// <summary>
+    /// 현재 체력 프로퍼티
+    /// </summary>
+    internal int CurrentHp
+    {
+        get { return currentHp; }
+        set
+        {
+            if (value <= Consts.none)
+            { value = Consts.minValue; }
+            currentHp = value;
+        }
+    }
     /// <summary>
     /// 총 마력
     /// </summary>
-    protected int mp = 1;
+    protected int mp = Consts.minValue;
+    /// <summary>
+    /// 총마력 프로퍼티
+    /// </summary>
+    internal int Mp
+    {
+        get { return mp; }
+        set
+        {
+            if (value <= Consts.none)
+            { value = Consts.minValue; }
+            mp = value;
+        }
+    }
     /// <summary>
     /// 현재 마력
     /// </summary>
-    protected int currentMp = 1;
+    protected int currentMp = Consts.minValue;
+    /// <summary>
+    /// 현재 마력 프로퍼티
+    /// </summary>
+    internal int CurrentMp
+    {
+        get { return currentMp; }
+        set
+        {
+            if (value <= Consts.none)
+            { value = Consts.minValue; }
+            currentMp = value;
+        }
+    }
     /// <summary>
     /// 데미지 수치
     /// </summary>
-    protected int damage = 1;
+    protected int damage = Consts.minValue;
     /// <summary>
     /// 죽음 판정
     /// </summary>
     protected bool isDead = false;
     /// <summary>
+    /// 죽음 체크용 프로퍼티
+    /// </summary>
+    internal bool IsDead { get { return isDead; } }
+    /// <summary>
     /// 공격데미지 계산
     /// </summary>
-    void Attack() { }
+    void Attack()
+    { damage = Atk; }
     /// <summary>
     /// 맞고 남은 체력를 돌려줌
     /// </summary>
     protected int Damaged(int otherDmg)
     {
         otherDmg -= def;
-        if (otherDmg <= 0)
+        if (otherDmg <= Consts.none)
         {
             Debug.Log("방어 성공");
-            return Consts.noDamage;
+            return Consts.none;
         }
         else
         { return reduceHp(otherDmg); }
@@ -124,13 +207,13 @@ class BattleUnit : Object
     /// <returns></returns>
     protected int reduceHp(int hpDmg)
     {
-        currentHp -= hpDmg;
-        if (currentHp <= 0)
+        CurrentHp -= hpDmg;
+        if (CurrentHp <= Consts.none)
         {
-            currentHp = Consts.dead;
+            CurrentHp = Consts.dead;
             Dead();
         }
-        return currentHp;
+        return CurrentHp;
 
     }
     /// <summary>
@@ -140,14 +223,14 @@ class BattleUnit : Object
     /// <returns></returns>
     protected bool reduceMp(int usedMp)
     {
-        if (currentMp - usedMp < 0)
+        if (CurrentMp - usedMp < Consts.none)
         {
             Debug.Log("Mp가 부족합니다.");
             return false;
         }
         else
         {
-            currentMp -= usedMp;
+            CurrentMp -= usedMp;
             return true;
         }
     }
@@ -163,29 +246,38 @@ class BattleUnit : Object
     /// <returns></returns>
     protected int DamageIncrease(int increaseDmg)
     { return damage += increaseDmg; }
-}
-/// <summary>
-/// 몬스터 클래스
-/// </summary>
-class Monster : BattleUnit
-{
+
     /// <summary>
-    /// 드랍하는 Exp 수치
+    /// 가지고 있는 골드 수치
     /// </summary>
-    int dropExp = 0;
+    int gold = Consts.none;
     /// <summary>
-    /// 드랍하는 골드 수치
+    /// 드랍 골드 프로퍼티
     /// </summary>
-    int dropGold = 0;
+    internal int Gold
+    {
+        get { return gold; }
+        private set
+        {
+            if (value <= Consts.none)
+            { value = Consts.minValue; }
+            gold = value;
+        }
+    }
     /// <summary>
-    /// 드랍하는 아이템
+    /// plusGold만큼 골드 값 증가.
     /// </summary>
-    item dropItem;
+    /// <param name="plusGold"></param>
+    /// <returns></returns>
+    internal int IncreaseGold(int plusGold)
+    { return Gold += plusGold; }
     /// <summary>
-    /// 보상 드립 함수
+    /// minusGold만큼 골드 값 감소
     /// </summary>
-    void DropReward()
-    { }
+    /// <param name="minusGold"></param>
+    /// <returns></returns>
+    internal int DecreaseGold(int minusGold)
+    { return Gold -= minusGold; }
 }
 /// <summary>
 /// 레벨업 관련 클래스

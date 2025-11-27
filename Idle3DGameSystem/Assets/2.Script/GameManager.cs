@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Net;
 using UnityEngine;
 
 /// <summary>
@@ -68,8 +70,11 @@ public class GameManager : MonoSingleton<GameManager>
     /// <summary>
     /// 스테이지 클래스 변수 
     /// </summary>
-    [Tooltip("스테이지 클래스 변수")]
     [SerializeField] private Stage stage;
+    /// <summary>
+    /// 스테이지 읽기 전용
+    /// </summary>
+    internal Stage Stage { get { return stage; } }
     /// <summary>
     /// 게임 시작 시점
     /// </summary>
@@ -79,7 +84,10 @@ public class GameManager : MonoSingleton<GameManager>
     /// 게임 시작
     /// </summary>
     internal void StartGame()
-    { SetName(); }
+    {
+        SetName();
+        StartCoroutine(AutoBattle());
+    }
     /// <summary>
     /// 이름입력을 위한 세팅 함수
     /// </summary>
@@ -133,11 +141,19 @@ public class GameManager : MonoSingleton<GameManager>
         UiMan.LevelText(User.Level);
         UiMan.StageText(stage.MainStage, stage.SubStage);
     }
+    IEnumerator AutoBattle()
+    {
+        PlayerTurn();
+        yield return null;
+        MonsterTurn();
+        yield return null;
+    }
     /// <summary>
     /// 플레이어 턴
     /// </summary>
     void PlayerTurn()
-    { }
+    {
+    }
     /// <summary>
     /// 몬스터 턴
     /// </summary>

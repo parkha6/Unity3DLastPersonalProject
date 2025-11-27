@@ -67,24 +67,41 @@ internal class Player : BattleUnit
     /// <summary>
     /// 총 경험치
     /// </summary>
-    int exp = 1;
+    int exp = Consts.minValue;
+    /// <summary>
+    /// 총 경험치 프로퍼티
+    /// </summary>
+    internal int Exp { get { return exp; } }
     /// <summary>
     /// 현재 경험치
     /// </summary>
-    int currentExp = 0;
+    int currentExp = Consts.none;
+    /// <summary>
+    /// 현재 경험치 프로퍼티
+    /// </summary>
+    internal int CurrentExp
+    {
+        get { return currentExp; }
+        private set
+        {
+            if (value <= Consts.none)
+            { value = Consts.none; }
+            currentExp = value;
+        }
+    }
     /// <summary>
     /// 경험치 초기화
     /// </summary>
     /// <returns></returns>
     int ResetExp()
-    { return currentExp = 0; }
+    { return CurrentExp = Consts.none; }
     /// <summary>
     /// plusExp만큼 경험치를 증가시킴.
     /// </summary>
     /// <param name="plusExp"></param>
     /// <returns></returns>
-    int IncreaseExp(int plusExp)
-    { return currentExp += plusExp; }
+    internal int IncreaseExp(int plusExp)
+    { return CurrentExp += plusExp; }
     /// <summary>
     /// plusExp만큼 총 경험치 증가.
     /// </summary>
