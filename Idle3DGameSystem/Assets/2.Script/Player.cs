@@ -10,6 +10,10 @@ internal class Player : BattleUnit
     [Tooltip("레벨 클래스 넣는 변수")]
     [SerializeField] Level levelClass;
     /// <summary>
+    /// 스텟포인트
+    /// </summary>
+    int statPoint = Consts.none;
+    /// <summary>
     /// 총 경험치
     /// </summary>
     int exp = Consts.minValue;
@@ -43,24 +47,19 @@ internal class Player : BattleUnit
     {
         CurrentExp += plusExp;
         UiManager.Instance.SetExp(CurrentExp, Exp);
-
         while (CurrentExp >= Exp && Level < Consts.maxLevel)
-        {
-            currentExp -= Exp;
-            Level = levelClass.IncreaseLevel(Level);
-            UiManager.Instance.LevelText(Level);
-            Atk += levelClass.RandomIncreaseValue(false);
-            UiManager.Instance.SetAtk(Atk);
-            Def += levelClass.RandomIncreaseValue(false);
-            UiManager.Instance.SetDef(def);
-            Hp += levelClass.RandomIncreaseValue(true);
-            UiManager.Instance.SetHp(CurrentHp, Hp);
-            Mp += levelClass.RandomIncreaseValue(true);
-            UiManager.Instance.SetMp(CurrentMp, Mp);
-            exp += Consts.barStat;
-            UiManager.Instance.SetExp(CurrentExp, Exp);
-        }
+        { SetLevelUp(); }
         return currentExp;
+    }
+    /// <summary>
+    /// 레벨업 할때 세팅
+    /// </summary>
+    void SetLevelUp()
+    {
+        currentExp -= Exp;
+        Level = levelClass.IncreaseLevel(Level);
+        UiManager.Instance.LevelText(Level);
+        statPoint += Consts.plusStatPoint;
     }
     /// <summary>
     /// 이름 입력 함수
@@ -76,8 +75,8 @@ internal class Player : BattleUnit
         Hp = Level * Consts.barStat;
         Mp = Level * Consts.barStat;
         exp = Level * Consts.barStat;
-        Atk = Random.Range(Consts.minValue, Consts.maxPlusStat);
-        Def = Random.Range(Consts.minValue, Consts.maxPlusStat);
+        Atk = Consts.minValue;
+        Def = Consts.none;
     }
     /// <summary>
     /// 플레이어는 여기서 Hp가 UI창에 반영됨

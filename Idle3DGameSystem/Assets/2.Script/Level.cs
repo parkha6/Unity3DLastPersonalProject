@@ -28,7 +28,7 @@ public class Level : MonoBehaviour
     /// <returns></returns>
     internal int RandomIncreaseValue(bool isBar)
     {
-        byte plusValue = (byte)Random.Range(Consts.minValue, Consts.maxPlusStat);
+        byte plusValue = (byte)Random.Range(Consts.minValue, Consts.plusStatPoint);
         if (isBar)
         { plusValue *= Consts.barStat; }
         return plusValue;

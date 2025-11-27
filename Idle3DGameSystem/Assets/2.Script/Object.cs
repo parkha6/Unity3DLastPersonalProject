@@ -198,7 +198,7 @@ class BattleUnit : Object
     /// </summary>
     /// <param name="otherDmg"></param>
     protected void GetDamaged(int otherDmg)
-    { CurrentHp = ReduceHp(Damaged(otherDmg)); }
+    { ReduceHp(Damaged(otherDmg)); }
     /// <summary>
     /// 맞고 남은 체력를 돌려줌
     /// </summary>
@@ -211,7 +211,7 @@ class BattleUnit : Object
         {
             Debug.Log($"남은 공격력{otherDmg}");
             Debug.Log($"{nameIs}방어 성공");
-            return Consts.none;
+            return otherDmg = Consts.none;
         }
         else
         { return otherDmg; }
@@ -222,15 +222,20 @@ class BattleUnit : Object
     /// </summary>
     /// <param name="hpDmg"></param>
     /// <returns></returns>
-    protected int ReduceHp(int hpDmg)
+    protected void ReduceHp(int hpDmg)
     {
-        CurrentHp -= hpDmg;
-        if (CurrentHp <= Consts.none)
+        Debug.Log($"들어온 데미지{hpDmg}");
+        Debug.Log($"현재 Hp{CurrentHp}");
+        if (hpDmg >= 0)
         {
-            CurrentHp = Consts.dead;
-            Dead();
+            CurrentHp -= hpDmg;
+            if (CurrentHp <= Consts.none)
+            {
+                CurrentHp = Consts.dead;
+                Dead();
+            }
         }
-        return CurrentHp;
+        Debug.Log($"피격 후 Hp{CurrentHp}");
     }
     /// <summary>
     /// usedMp에 사용mp값을 입력하면 기술을 쓸수 있는지 없는지 판단해서 돌려준다.
@@ -282,11 +287,6 @@ class BattleUnit : Object
     internal int IncreaseGold(int plusGold)
     { return Gold += plusGold; }
     /// <summary>
-    /// minusGold만큼 골드 값 감소
-    /// </summary>
-    /// <param name="minusGold"></param>
-    /// <returns></returns>
-    /// <summary>
     /// 죽었으면 isDead를 true로 바꿔줌.
     /// </summary>
     protected void Dead()
@@ -297,5 +297,8 @@ class BattleUnit : Object
     /// 재시작용 체력회복 함수
     /// </summary>
     internal void StartAgain()
-    { CurrentHp = Hp; }
+    {
+        CurrentHp = Hp;
+        isDead = false;
+    }
 }

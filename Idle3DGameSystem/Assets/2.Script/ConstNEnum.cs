@@ -39,7 +39,7 @@ class Consts
     /// <summary>
     /// 스텟이 오를 수 있는 최고수치
     /// </summary>
-    internal const byte maxPlusStat = 6;
+    internal const byte plusStatPoint = 5;
     /// <summary>
     /// 체력 마력 경험치 보정용
     /// </summary>
@@ -47,5 +47,5 @@ class Consts
     /// <summary>
     /// 코루틴 대기 시간
     /// </summary>
-    internal const byte waitingTime = 1;
+    internal const float waitingTime = 0.3f;
 }

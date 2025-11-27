@@ -162,15 +162,18 @@ public class GameManager : MonoSingleton<GameManager>
         byte hitWho = (byte)Random.Range(0, monAmount);
         if (monAmount == Consts.twoMon)
         {
-            if (hitWho == Consts.SecondMon || targetMon.IsDead)
+            if (hitWho == Consts.SecondMon || (hitWho == Consts.firstMon && targetMon.IsDead))
             {
                 targetMon = monsterList.TakeMonster(hitWho);
                 if (targetMon.IsDead)
+                {
                     hitWho = Consts.firstMon;
-                targetMon = monsterList.TakeMonster(hitWho);
+                    targetMon = monsterList.TakeMonster(hitWho);
+                }
             }
         }
         //공격
+
         targetMon.GetAttacked(User.Attack());
         Debug.Log($"몬스터 남은 체력{targetMon.CurrentHp}");
         Debug.Log($"monAmount값{monAmount}");
@@ -180,9 +183,15 @@ public class GameManager : MonoSingleton<GameManager>
         else if (monAmount == Consts.twoMon)
         {
             if (hitWho == Consts.firstMon)
-            { UiMan.MonsterLeftHp(targetMon.CurrentHp, targetMon.Hp); }
+            {
+                Debug.Log($"Hit Who 0 {hitWho}");
+                UiMan.MonsterLeftHp(targetMon.CurrentHp, targetMon.Hp);
+            }
             else if (hitWho == Consts.SecondMon)
-            { UiMan.MonsterRightHp(targetMon.CurrentHp, targetMon.Hp); }
+            {
+                Debug.Log($"Hit Who 1 {hitWho}");
+                UiMan.MonsterRightHp(targetMon.CurrentHp, targetMon.Hp);
+            }
         }
         //죽음체크
         if (targetMon.IsDead)
