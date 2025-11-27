@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -173,13 +174,30 @@ public class MonsterList : MonoBehaviour
     }
     internal bool AllAttack(Player player)
     {
-        foreach (Monster mon in monsters)
-        {
-            player.GetAttacked(mon.Attack());
-            if (player.IsDead)
-            { return true; }
-        }
+        StartCoroutine(AttackOneByOne(player));
+        if (player.IsDead)
+        { return true; }
         return false;
+    }
+    /// <summary>
+    /// 한마리씩 때리기 위한 코루틴
+    /// </summary>
+    /// <param name="player"></param>
+    /// <returns></returns>
+    IEnumerator AttackOneByOne(Player player)
+    {
+        bool isStart = true;
+        while (isStart)
+        {
+            foreach (Monster mon in monsters)
+            {
+                player.GetAttacked(mon.Attack());
+                yield return new WaitForSeconds(Consts.waitingTime);
+                if (player.IsDead)
+                { isStart = false; }
+            }
+            isStart = false;
+        }
     }
     /// <summary>
     /// 몬스터가 모두 죽었는지 체크하고 모두 죽었으면 리스트를 비움.

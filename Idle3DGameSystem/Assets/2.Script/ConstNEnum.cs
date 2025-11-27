@@ -44,4 +44,8 @@ class Consts
     /// 체력 마력 경험치 보정용
     /// </summary>
     internal const byte barStat = 10;
+    /// <summary>
+    /// 코루틴 대기 시간
+    /// </summary>
+    internal const byte waitingTime = 1;
 }

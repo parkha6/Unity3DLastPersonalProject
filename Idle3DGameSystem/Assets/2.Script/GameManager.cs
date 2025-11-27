@@ -138,9 +138,9 @@ public class GameManager : MonoSingleton<GameManager>
         while (!monsterList.CheckAllDead())
         {
             PlayerTurn();
-            yield return null;
+            yield return new WaitForSeconds(Consts.waitingTime);
             MonsterTurn();
-            yield return null;
+            yield return new WaitForSeconds(Consts.waitingTime);
         }
         if (monsterList.CheckAllDead())
         {
@@ -176,22 +176,13 @@ public class GameManager : MonoSingleton<GameManager>
         Debug.Log($"monAmount값{monAmount}");
         //결과를 UI에 갱신
         if (monAmount == Consts.minValue)
-        {
-            UiMan.MonsterLeftHp(targetMon.CurrentHp,targetMon.Hp);
-            targetMon.HitAnimation();
-        }
+        { UiMan.MonsterLeftHp(targetMon.CurrentHp, targetMon.Hp); }
         else if (monAmount == Consts.twoMon)
         {
             if (hitWho == Consts.firstMon)
-            {
-                UiMan.MonsterLeftHp(targetMon.CurrentHp, targetMon.Hp);
-                targetMon.HitAnimation();
-            }
+            { UiMan.MonsterLeftHp(targetMon.CurrentHp, targetMon.Hp); }
             else if (hitWho == Consts.SecondMon)
-            {
-                UiMan.MonsterRightHp(targetMon.CurrentHp, targetMon.Hp);
-                targetMon.HitAnimation();
-            }
+            { UiMan.MonsterRightHp(targetMon.CurrentHp, targetMon.Hp); }
         }
         //죽음체크
         if (targetMon.IsDead)

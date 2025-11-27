@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 /// <summary>
@@ -8,7 +9,7 @@ class Monster : BattleUnit
     /// <summary>
     /// 박스 애니메이션
     /// </summary>
-    [SerializeField]Animator boxAnimator;
+    [SerializeField] Animator boxAnimator;
     /// <summary>
     /// 드랍하는 경험치 수치
     /// </summary>
@@ -41,9 +42,18 @@ class Monster : BattleUnit
             player.IncreaseExp(dropExp);
         }
     }
-    internal void HitAnimation()
+    internal override void GetAttacked(int otherDmg)
+    { StartCoroutine(GetAttackedRepeat(otherDmg)); }
+    IEnumerator GetAttackedRepeat(int otherDmg)
     {
-        boxAnimator.SetBool("damaged", true);
-        boxAnimator.SetBool("damaged", false);
+        bool isStart = true;
+        while (isStart)
+        {
+            boxAnimator.SetBool("damaged", true);
+            GetDamaged(otherDmg);
+            yield return new WaitForSeconds(Consts.waitingTime);
+            boxAnimator.SetBool("damaged", false);
+            isStart = false;
+        }
     }
 }
