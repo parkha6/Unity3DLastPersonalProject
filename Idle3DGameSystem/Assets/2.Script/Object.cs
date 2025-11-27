@@ -22,7 +22,7 @@ public class Object : MonoBehaviour
         {
             if (value <= Consts.none)
             { value = Consts.minValue; }
-            else if (value > Consts.maxLevel)
+            else if (value >= Consts.maxLevel)
             { value = Consts.maxLevel; }
             level = value;
         }
@@ -298,26 +298,4 @@ class BattleUnit : Object
     /// </summary>
     internal void StartAgain()
     { CurrentHp = Hp; }
-}
-/// <summary>
-/// 레벨업 관련 클래스
-/// </summary>
-class Level
-{
-    /// <summary>
-    /// 현재 레벨을 넣으면 1 오른다.
-    /// </summary>
-    /// <param name="currentLevel"></param>
-    /// <returns></returns>
-    int IncreaseLevel(int currentLevel)
-    { return ++currentLevel; }
-    /// <summary>
-    /// 현재값과 더하려는 값을 넣으면 더한 값을 리턴한다.
-    /// 공격력 증가, 방어력 증가용.
-    /// </summary>
-    /// <param name="currentValue"></param>
-    /// <param name="plusValue"></param>
-    /// <returns></returns>
-    int IncreaseAnything(int currentValue, int plusValue)
-    { return currentValue + plusValue; }
 }

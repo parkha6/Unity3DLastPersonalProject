@@ -5,6 +5,11 @@ using UnityEngine;
 internal class Player : BattleUnit
 {
     /// <summary>
+    /// 레벨 클래스 넣는 변수
+    /// </summary>
+    [Tooltip("레벨 클래스 넣는 변수")]
+    [SerializeField] Level levelClass;
+    /// <summary>
     /// 총 경험치
     /// </summary>
     int exp = Consts.minValue;
@@ -30,39 +35,33 @@ internal class Player : BattleUnit
         }
     }
     /// <summary>
-    /// 경험치 초기화
-    /// </summary>
-    /// <returns></returns>
-    int ResetExp()
-    { return CurrentExp = Consts.none; }
-    /// <summary>
-    /// plusExp만큼 경험치를 증가시킴.
+    /// plusExp만큼 경험치를 증가시키고 현재 경험치가 전체경험치보다 많으면 레벨을 올린다.
     /// </summary>
     /// <param name="plusExp"></param>
     /// <returns></returns>
     internal int IncreaseExp(int plusExp)
-    { return CurrentExp += plusExp; }
-    /// <summary>
-    /// plusExp만큼 총 경험치 증가.
-    /// </summary>
-    /// <param name="plusExp"></param>
-    /// <returns></returns>
-    int IncreaseWholeExp(int plusExp)
-    { return exp += plusExp; }
-    /// <summary>
-    /// plusHp만큼 총 체력 증가.
-    /// </summary>
-    /// <param name="plusHp"></param>
-    /// <returns></returns>
-    int IncreaseWholeHp(int plusHp)
-    { return hp += plusHp; }
-    /// <summary>
-    /// plusMp만큼 총 마력 증가.
-    /// </summary>
-    /// <param name="plusMp"></param>
-    /// <returns></returns>
-    int IncreaseWholeMp(int plusMp)
-    { return mp += plusMp; }
+    {
+        CurrentExp += plusExp;
+        UiManager.Instance.SetExp(CurrentExp, Exp);
+
+        while (CurrentExp >= Exp && Level < Consts.maxLevel)
+        {
+            currentExp -= Exp;
+            Level = levelClass.IncreaseLevel(Level);
+            UiManager.Instance.LevelText(Level);
+            Atk += levelClass.RandomIncreaseValue(false);
+            UiManager.Instance.SetAtk(Atk);
+            Def += levelClass.RandomIncreaseValue(false);
+            UiManager.Instance.SetDef(def);
+            Hp += levelClass.RandomIncreaseValue(true);
+            UiManager.Instance.SetHp(CurrentHp, Hp);
+            Mp += levelClass.RandomIncreaseValue(true);
+            UiManager.Instance.SetMp(CurrentMp, Mp);
+            exp += Consts.barStat;
+            UiManager.Instance.SetExp(CurrentExp, Exp);
+        }
+        return currentExp;
+    }
     /// <summary>
     /// 이름 입력 함수
     /// </summary>
@@ -85,9 +84,9 @@ internal class Player : BattleUnit
     /// </summary>
     /// <param name="otherDmg"></param>
     internal override void GetAttacked(int otherDmg)
-    { 
+    {
         GetDamaged(otherDmg);
-        UiManager.Instance.SetHp(CurrentHp,Hp);
+        UiManager.Instance.SetHp(CurrentHp, Hp);
         Debug.Log($"플레이어 Hp 호출 체크 {CurrentHp}/{Hp}");
     }
 }
