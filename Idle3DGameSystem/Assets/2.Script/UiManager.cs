@@ -121,6 +121,36 @@ public class UiManager : MonoSingleton<UiManager>
     [Tooltip("사용자 정보 레벨 텍스트")]
     [SerializeField] TMP_Text infoLevelText;
     /// <summary>
+    /// 사용자 정보 Hp 바
+    /// </summary>
+    [Tooltip("사용자 정보 Hp 바")]
+    [SerializeField] Image infoHpBar;
+    /// <summary>
+    /// 사용자 정보 Hp 텍스트
+    /// </summary>
+    [Tooltip("사용자 정보 Hp 텍스트")]
+    [SerializeField] TMP_Text infoHpText;
+    /// <summary>
+    /// 사용자 정보 Mp 바
+    /// </summary>
+    [Tooltip("사용자 정보 Mp 바")]
+    [SerializeField] Image infoMpBar;
+    /// <summary>
+    /// 사용자 정보 Mp 텍스트
+    /// </summary>
+    [Tooltip("사용자 정보 Mp 텍스트")]
+    [SerializeField] TMP_Text infoMpText;
+    /// <summary>
+    /// 사용자 정보 Exp 바
+    /// </summary>
+    [Tooltip("사용자 정보 Exp 바")]
+    [SerializeField] Image infoExpBar;
+    /// <summary>
+    /// 사용자 정보 Exp 텍스트
+    /// </summary>
+    [Tooltip("사용자 정보 Exp 텍스트")]
+    [SerializeField] TMP_Text infoExpText;
+    /// <summary>
     /// 사용자 정보 공격력 텍스트
     /// </summary>
     [Tooltip("사용자 정보 공격력 텍스트")]
@@ -280,6 +310,8 @@ public class UiManager : MonoSingleton<UiManager>
     internal string SetHp(int currentHp, int hp)
     {
         userHpBar.fillAmount = (float)currentHp / hp;
+        infoHpBar.fillAmount = (float)currentHp / hp;
+        infoHpText.text = $"{currentHp}/{hp}";
         return userHp.text = $"{currentHp}/{hp}";
     }
     /// <summary>
@@ -290,6 +322,8 @@ public class UiManager : MonoSingleton<UiManager>
     internal string SetMp(int currentMp, int mp)
     {
         userMpBar.fillAmount = (float)currentMp / (float)mp;
+        infoMpBar.fillAmount = (float)currentMp / (float)mp;
+        infoMpText.text = $"{currentMp}/{mp}";
         return userMp.text = $"{currentMp}/{mp}";
     }
     /// <summary>
@@ -300,6 +334,8 @@ public class UiManager : MonoSingleton<UiManager>
     internal string SetExp(int currentExp, int exp)
     {
         userExpBar.fillAmount = (float)currentExp / (float)exp;
+        infoExpBar.fillAmount = (float)currentExp / (float)exp;
+        infoExpText.text = $"{currentExp}/{exp}";
         return userExp.text = $"{currentExp}/{exp}";
     }
     /// <summary>
