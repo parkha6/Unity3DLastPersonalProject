@@ -131,7 +131,7 @@ public class MonsterList : MonoBehaviour
     {
         int currentTier = GameManager.Instance.Stage.SubStage;
         targetMon.Hp = Random.Range(Consts.minValue, currentTier) * targetMon.Level;
-        return targetMon.Hp;
+        return targetMon.Hp * Consts.barStat;
     }
     /// <summary>
     /// 몬스터 마력 세팅 함수
@@ -142,7 +142,7 @@ public class MonsterList : MonoBehaviour
     {
         int currentTier = GameManager.Instance.Stage.SubStage;
         targetMon.Mp = Random.Range(Consts.minValue, currentTier) * targetMon.Level;
-        return targetMon.Mp;
+        return targetMon.Mp * Consts.barStat;
     }
     /// <summary>
     /// 스텟을 넣으면 레벨에 맞춰 랜덤 배치함.

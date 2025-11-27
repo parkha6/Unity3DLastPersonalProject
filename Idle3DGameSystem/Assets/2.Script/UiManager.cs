@@ -279,7 +279,7 @@ public class UiManager : MonoSingleton<UiManager>
 
     internal string SetHp(int currentHp, int hp)
     {
-        userHpBar.fillAmount = (float)(currentHp / hp);
+        userHpBar.fillAmount = (float)currentHp / hp;
         return userHp.text = $"{currentHp}/{hp}";
     }
     /// <summary>
@@ -289,7 +289,7 @@ public class UiManager : MonoSingleton<UiManager>
     /// <param name="mp"></param>
     internal string SetMp(int currentMp, int mp)
     {
-        userMpBar.fillAmount = (float)(currentMp / mp);
+        userMpBar.fillAmount = (float)currentMp / (float)mp;
         return userMp.text = $"{currentMp}/{mp}";
     }
     /// <summary>
@@ -299,7 +299,7 @@ public class UiManager : MonoSingleton<UiManager>
     /// <param name="exp"></param>
     internal string SetExp(int currentExp, int exp)
     {
-        userExpBar.fillAmount = (float)(currentExp / exp);
+        userExpBar.fillAmount = (float)currentExp / (float)exp;
         return userExp.text = $"{currentExp}/{exp}";
     }
     /// <summary>
@@ -357,10 +357,21 @@ public class UiManager : MonoSingleton<UiManager>
         Debug.Log("왼쪽 정보창");
         leftName.text = targetMon.nameIs;
         leftLevel.text = targetMon.Level.ToString();
-        leftHpBar.fillAmount = (float)(targetMon.CurrentHp / targetMon.Hp);
+        leftHpBar.fillAmount = (float)targetMon.CurrentHp / (float)targetMon.Hp;
         leftHpText.text = $"{targetMon.CurrentHp}/{targetMon.Hp}";
-        leftMpBar.fillAmount = (float)(targetMon.CurrentMp / targetMon.Mp);
+        leftMpBar.fillAmount = (float)targetMon.CurrentMp / (float)targetMon.Mp;
         leftMpText.text = $"{targetMon.CurrentMp}/{targetMon.Mp}";
+    }
+    /// <summary>
+    /// 왼쪽 상자 hp만 바꿈
+    /// </summary>
+    /// <param name="currentHp"></param>
+    /// <param name="hp"></param>
+    /// <returns></returns>
+    internal string MonsterLeftHp(int currentHp, int hp)
+    {
+        leftHpBar.fillAmount = (float)currentHp / (float)hp;
+        return leftHpText.text = $"{currentHp}/{hp}";
     }
     /// <summary>
     /// 오른쪽 몬스터 정보창 띄우기
@@ -370,10 +381,21 @@ public class UiManager : MonoSingleton<UiManager>
         Debug.Log("오른쪽 정보창");
         rightName.text = targetMon.nameIs;
         rightLevel.text = targetMon.Level.ToString();
-        rightHpBar.fillAmount = (float)(targetMon.CurrentHp / targetMon.Hp);
+        rightHpBar.fillAmount = (float)targetMon.CurrentHp / (float)targetMon.Hp;
         rightHpText.text = $"{targetMon.CurrentHp}/{targetMon.Hp}";
-        rightMpBar.fillAmount = (float)(targetMon.CurrentMp / targetMon.Mp);
+        rightMpBar.fillAmount = (float)targetMon.CurrentMp / (float)targetMon.Mp;
         rightMpText.text = $"{targetMon.CurrentMp}/{targetMon.Mp}";
+    }
+    /// <summary>
+    /// 오른쪽 상자 hp만 바꿈
+    /// </summary>
+    /// <param name="currentHp"></param>
+    /// <param name="hp"></param>
+    /// <returns></returns>
+    internal string MonsterRightHp(int currentHp, int hp)
+    {
+        rightHpBar.fillAmount = (float)currentHp / (float)hp;
+        return rightHpText.text = $"{currentHp}/{hp}";
     }
     private void Start()
     {

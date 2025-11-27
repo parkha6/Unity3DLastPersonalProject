@@ -131,7 +131,7 @@ class BattleUnit : Object
         private set
         {
             if (value <= Consts.none)
-            { value = Consts.minValue; }
+            { value = Consts.none; }
             currentHp = value;
         }
     }
@@ -166,7 +166,7 @@ class BattleUnit : Object
         private set
         {
             if (value <= Consts.none)
-            { value = Consts.minValue; }
+            { value = Consts.none; }
             currentMp = value;
         }
     }

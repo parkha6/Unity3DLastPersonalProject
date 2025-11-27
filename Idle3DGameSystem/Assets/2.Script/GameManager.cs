@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -173,22 +172,24 @@ public class GameManager : MonoSingleton<GameManager>
         }
         //공격
         targetMon.GetAttacked(User.Attack());
+        Debug.Log($"몬스터 남은 체력{targetMon.CurrentHp}");
+        Debug.Log($"monAmount값{monAmount}");
         //결과를 UI에 갱신
         if (monAmount == Consts.minValue)
         {
-            UiMan.MonsterLeftInfo(targetMon);
+            UiMan.MonsterLeftHp(targetMon.CurrentHp,targetMon.Hp);
             targetMon.HitAnimation();
         }
         else if (monAmount == Consts.twoMon)
         {
             if (hitWho == Consts.firstMon)
             {
-                UiMan.MonsterLeftInfo(targetMon);
+                UiMan.MonsterLeftHp(targetMon.CurrentHp, targetMon.Hp);
                 targetMon.HitAnimation();
             }
             else if (hitWho == Consts.SecondMon)
             {
-                UiMan.MonsterRightInfo(targetMon);
+                UiMan.MonsterRightHp(targetMon.CurrentHp, targetMon.Hp);
                 targetMon.HitAnimation();
             }
         }
