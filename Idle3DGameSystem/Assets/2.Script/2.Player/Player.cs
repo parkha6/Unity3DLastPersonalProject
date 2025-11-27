@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Drawing;
 using UnityEngine;
 /// <summary>
 /// 플레이어 클래스
@@ -58,7 +57,7 @@ internal class Player : BattleUnit
     {
         CurrentExp += plusExp;
         UiManager.Instance.SetExp(CurrentExp, Exp);
-        while (CurrentExp >= Exp && Level < Consts.maxLevel)
+        while (CurrentExp >= Exp)
         { SetLevelUp(); }
         return currentExp;
     }
@@ -68,13 +67,34 @@ internal class Player : BattleUnit
     void SetLevelUp()
     {
         currentExp -= Exp;
-        Level = levelClass.IncreaseLevel(Level);
-        exp += Consts.barStat;
-        UiManager.Instance.LevelText(Level);
-        statPoint += Consts.plusStatPoint;
-        UiManager.Instance.SetPoint(StatPoint);
-        UiManager.Instance.SetUpButton(true);
-        UiManager.Instance.SetExp(CurrentExp, Exp);
+        if (Level < Consts.maxLevel)
+        {
+            Level = levelClass.IncreaseLevel(Level);
+            UiManager.Instance.LevelText(Level);
+        }
+        if (exp < Consts.maxInt - Consts.barStat)
+        {
+            exp += Consts.barStat;
+            UiManager.Instance.SetExp(CurrentExp, Exp);
+        }
+        else if (exp < Consts.maxInt && exp > Consts.maxInt - Consts.barStat)
+        {
+            exp = Consts.maxInt;
+            UiManager.Instance.SetExp(CurrentExp, Exp);
+        }
+
+        if (statPoint < Consts.maxInt - Consts.plusStatPoint)
+        {
+            statPoint += Consts.plusStatPoint;
+            UiManager.Instance.SetPoint(StatPoint);
+            UiManager.Instance.SetUpButton(true);
+        }
+        else if ((statPoint < Consts.maxInt && statPoint > Consts.maxInt - Consts.plusStatPoint))
+        {
+            statPoint = Consts.maxInt;
+            UiManager.Instance.SetPoint(StatPoint);
+            UiManager.Instance.SetUpButton(true);
+        }
     }
     /// <summary>
     /// 버튼 누르면 체력 10오름
@@ -88,6 +108,8 @@ internal class Player : BattleUnit
             UiManager.Instance.SetHp(CurrentHp, Hp);
             UiManager.Instance.SetPoint(StatPoint);
         }
+        else if (Hp == Consts.maxInt)
+        { UiManager.Instance.DeactiveHpUp(); }
         if (statPoint <= 0)
         { UiManager.Instance.SetUpButton(false); }
     }
@@ -103,6 +125,8 @@ internal class Player : BattleUnit
             UiManager.Instance.SetMp(CurrentMp, Mp);
             UiManager.Instance.SetPoint(StatPoint);
         }
+        else if (Mp == Consts.maxInt)
+        { UiManager.Instance.DeactiveMpUp(); }
         if (statPoint <= 0)
         { UiManager.Instance.SetUpButton(false); }
     }
@@ -118,6 +142,8 @@ internal class Player : BattleUnit
             UiManager.Instance.SetAtk(Atk);
             UiManager.Instance.SetPoint(StatPoint);
         }
+        else if (Atk == Consts.maxInt)
+        { UiManager.Instance.DeactiveAtkUp(); }
         if (statPoint <= 0)
         { UiManager.Instance.SetUpButton(false); }
     }
@@ -133,6 +159,8 @@ internal class Player : BattleUnit
             UiManager.Instance.SetDef(Def);
             UiManager.Instance.SetPoint(StatPoint);
         }
+        else if (Def == Consts.maxInt)
+        { UiManager.Instance.DeactiveDefUp(); }
         if (statPoint <= 0)
         { UiManager.Instance.SetUpButton(false); }
     }

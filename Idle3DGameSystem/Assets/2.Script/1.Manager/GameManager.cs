@@ -229,6 +229,12 @@ public class GameManager : MonoSingleton<GameManager>
     /// <summary>
     /// 게임 종료
     /// </summary>
-    void QuitGame()
-    { }
+    internal void QuitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else  
+        Application.Quit();
+#endif
+    }
 }

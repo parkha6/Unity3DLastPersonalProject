@@ -299,6 +299,12 @@ public class UiManager : MonoSingleton<UiManager>
     /// </summary>
     [Tooltip("카운트 다운 텍스트")]
     [SerializeField] TMP_Text countdownText;
+    [Header("종료 버튼")]
+    /// <summary>
+    /// 게임 종료 버튼
+    /// </summary>
+    [Tooltip("게임 종료 버튼")]
+    [SerializeField] Button exitButton;
     /// <summary>
     /// 이름 입력창 활성 & 비활성
     /// </summary>
@@ -442,6 +448,38 @@ public class UiManager : MonoSingleton<UiManager>
     internal void SetUpButton(bool isSet)
     { UpUi.SetActive(isSet); }
     /// <summary>
+    /// int가 최대일때 체력 버튼 비활성
+    /// </summary>
+    internal void DeactiveHpUp()
+    {
+        GameObject hpObject = hpUp.gameObject;
+        hpObject.SetActive(false);
+    }
+    /// <summary>
+    /// int가 최대일때 마력버튼 비활성
+    /// </summary>
+    internal void DeactiveMpUp()
+    {
+        GameObject mpObject = mpUp.gameObject;
+        mpObject.SetActive(false);
+    }
+    /// <summary>
+    /// int가 최대일때 공격력버튼 비활성
+    /// </summary>
+    internal void DeactiveAtkUp()
+    {
+        GameObject atkObject = atkUp.gameObject;
+        atkObject.SetActive(false);
+    }
+    /// <summary>
+    /// int가 최대일때 방어력버튼 비활성
+    /// </summary>
+    internal void DeactiveDefUp()
+    {
+        GameObject defObject = defUp.gameObject;
+        defObject.SetActive(false);
+    }
+    /// <summary>
     /// 몬스터가 1명이냐 2명이냐에 따라 UI표시를 바꿈
     /// </summary>
     /// <param name="isOne"></param>
@@ -539,5 +577,6 @@ public class UiManager : MonoSingleton<UiManager>
         mpUp.onClick.AddListener(GameMan.User.SetMpUp);
         atkUp.onClick.AddListener(GameMan.User.SetAtkUp);
         defUp.onClick.AddListener(GameMan.User.SetDefUp);
+        exitButton.onClick.AddListener(GameMan.QuitGame);
     }
 }
