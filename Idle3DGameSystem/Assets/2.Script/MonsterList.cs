@@ -82,14 +82,27 @@ public class MonsterList : MonoBehaviour
         Debug.Log(targetMon.nameIs);
         targetMon.Level = SetLevel(targetMon.Level);
         targetMon.Atk = SetStat(targetMon, targetMon.Atk);
-        targetMon.Def = SetStat(targetMon, targetMon.Def);
+        targetMon.Def = SetLowStat(targetMon, targetMon.Def);
+        Debug.Log(targetMon.Def);
         targetMon.Hp = SetHp(targetMon);
-        targetMon.CurrentHp = targetMon.Hp;
         targetMon.Mp = SetMp(targetMon);
-        targetMon.CurrentMp = targetMon.Mp;
         targetMon.DropExp = SetLargeStat(targetMon, targetMon.DropExp);
         targetMon.IncreaseGold(SetLargeStat(targetMon, targetMon.Gold));
     }
+    /// <summary>
+    /// 외부에서 몬스터 수 가져가는 함수
+    /// </summary>
+    /// <returns></returns>
+    internal byte ReturnAmount()
+    { return (byte)monsters.Count; }
+    /// <summary>
+    /// 특정번호의 몬스터를 돌려줌
+    /// </summary>
+    /// <param name="monNum"></param>
+    /// <returns></returns>
+    internal Monster TakeMonster(byte monNum)
+    { return monsters[monNum]; }
+
     /// <summary>
     /// 몬스터 이름 세팅 함수
     /// </summary>
@@ -118,7 +131,6 @@ public class MonsterList : MonoBehaviour
     {
         int currentTier = GameManager.Instance.Stage.SubStage;
         targetMon.Hp = Random.Range(Consts.minValue, currentTier) * targetMon.Level;
-        targetMon.CurrentHp = targetMon.Hp;
         return targetMon.Hp;
     }
     /// <summary>
@@ -130,7 +142,6 @@ public class MonsterList : MonoBehaviour
     {
         int currentTier = GameManager.Instance.Stage.SubStage;
         targetMon.Mp = Random.Range(Consts.minValue, currentTier) * targetMon.Level;
-        targetMon.CurrentMp = targetMon.Mp;
         return targetMon.Mp;
     }
     /// <summary>
@@ -142,6 +153,14 @@ public class MonsterList : MonoBehaviour
     int SetStat(Monster targetMon, int targetStat)
     { return targetStat = Random.Range(Consts.minValue, targetMon.Level); }
     /// <summary>
+    /// 스텟을 넣으면 0부터 레벨까지 랜덤배치함.
+    /// </summary>
+    /// <param name="targetMon"></param>
+    /// <param name="targetStat"></param>
+    /// <returns></returns>
+    int SetLowStat(Monster targetMon, int targetStat)
+    { return targetStat = Random.Range(Consts.none, targetMon.Level - Consts.minValue); }
+    /// <summary>
     /// 스텟을 넣으면 현재 스테이지까지 고려해서 랜덤 배치함.
     /// </summary>
     /// <param name="targetMon"></param>
@@ -152,10 +171,20 @@ public class MonsterList : MonoBehaviour
         int currentTier = GameManager.Instance.Stage.SubStage;
         return targetStat = Random.Range(Consts.none, currentTier) * targetMon.Level;
     }
+    internal bool AllAttack(Player player)
+    {
+        foreach (Monster mon in monsters)
+        {
+            player.GetAttacked(mon.Attack());
+            if (player.IsDead)
+            { return true; }
+        }
+        return false;
+    }
     /// <summary>
     /// 몬스터가 모두 죽었는지 체크하고 모두 죽었으면 리스트를 비움.
     /// </summary>
-    bool CheckAllDead()
+    internal bool CheckAllDead()
     {
         bool result = monsters.All<Monster>(monster => monster.IsDead == true);
         if (result)

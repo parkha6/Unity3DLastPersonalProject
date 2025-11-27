@@ -40,7 +40,7 @@ public class Object : MonoBehaviour
         set
         {
             if (value <= Consts.none)
-            { value = Consts.minValue; }
+            { value = Consts.none; }
             atk = value;
         }
     }
@@ -57,7 +57,7 @@ public class Object : MonoBehaviour
         set
         {
             if (value <= Consts.none)
-            { value = Consts.minValue; }
+            { value = Consts.none; }
             def = value;
         }
     }
@@ -115,6 +115,7 @@ class BattleUnit : Object
             if (value <= Consts.none)
             { value = Consts.minValue; }
             hp = value;
+            currentHp = hp;
         }
     }
     /// <summary>
@@ -127,7 +128,7 @@ class BattleUnit : Object
     internal int CurrentHp
     {
         get { return currentHp; }
-        set
+        private set
         {
             if (value <= Consts.none)
             { value = Consts.minValue; }
@@ -149,6 +150,7 @@ class BattleUnit : Object
             if (value <= Consts.none)
             { value = Consts.minValue; }
             mp = value;
+            currentMp = mp;
         }
     }
     /// <summary>
@@ -161,7 +163,7 @@ class BattleUnit : Object
     internal int CurrentMp
     {
         get { return currentMp; }
-        set
+        private set
         {
             if (value <= Consts.none)
             { value = Consts.minValue; }
@@ -183,21 +185,27 @@ class BattleUnit : Object
     /// <summary>
     /// 공격데미지 계산
     /// </summary>
-    void Attack()
-    { damage = Atk; }
+    internal int Attack()
+    { return damage = Atk; }
+
+    internal void GetAttacked(int otherDmg)
+    { CurrentHp = ReduceHp(Damaged(otherDmg)); }
     /// <summary>
     /// 맞고 남은 체력를 돌려줌
     /// </summary>
-    protected int Damaged(int otherDmg)
+    int Damaged(int otherDmg)
     {
         otherDmg -= def;
+        Debug.Log($"들어온 데미지{otherDmg}");
+        Debug.Log($"유닛 방어력{def}");
         if (otherDmg <= Consts.none)
         {
-            Debug.Log("방어 성공");
+            Debug.Log($"남은 공격력{otherDmg}");
+            Debug.Log($"{nameIs}방어 성공");
             return Consts.none;
         }
         else
-        { return reduceHp(otherDmg); }
+        { return otherDmg; }
     }
     /// <summary>
     /// hpDmg만큼 체력을 깎고 돌려준다.
@@ -205,7 +213,7 @@ class BattleUnit : Object
     /// </summary>
     /// <param name="hpDmg"></param>
     /// <returns></returns>
-    protected int reduceHp(int hpDmg)
+    protected int ReduceHp(int hpDmg)
     {
         CurrentHp -= hpDmg;
         if (CurrentHp <= Consts.none)
@@ -214,14 +222,13 @@ class BattleUnit : Object
             Dead();
         }
         return CurrentHp;
-
     }
     /// <summary>
     /// usedMp에 사용mp값을 입력하면 기술을 쓸수 있는지 없는지 판단해서 돌려준다.
     /// </summary>
     /// <param name="usedMp"></param>
     /// <returns></returns>
-    protected bool reduceMp(int usedMp)
+    protected bool ReduceMp(int usedMp)
     {
         if (CurrentMp - usedMp < Consts.none)
         {
@@ -235,18 +242,12 @@ class BattleUnit : Object
         }
     }
     /// <summary>
-    /// 죽었으면 isDead를 true로 바꿔줌.
-    /// </summary>
-    protected void Dead()
-    { isDead = true; }
-    /// <summary>
     /// increaseDMG만큼 데미지를 더해서 돌려준다.
     /// </summary>
     /// <param name="increaseDmg"></param>
     /// <returns></returns>
     protected int DamageIncrease(int increaseDmg)
     { return damage += increaseDmg; }
-
     /// <summary>
     /// 가지고 있는 골드 수치
     /// </summary>
@@ -276,8 +277,18 @@ class BattleUnit : Object
     /// </summary>
     /// <param name="minusGold"></param>
     /// <returns></returns>
+    /// <summary>
+    /// 죽었으면 isDead를 true로 바꿔줌.
+    /// </summary>
+    protected void Dead()
+    { isDead = true; }
     internal int DecreaseGold(int minusGold)
     { return Gold -= minusGold; }
+    /// <summary>
+    /// 재시작용 체력회복 함수
+    /// </summary>
+    internal void StartAgain()
+    { CurrentHp = Hp; }
 }
 /// <summary>
 /// 레벨업 관련 클래스

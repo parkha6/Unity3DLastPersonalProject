@@ -1,8 +1,14 @@
+using UnityEngine;
+
 /// <summary>
 /// 몬스터 클래스
 /// </summary>
 class Monster : BattleUnit
 {
+    /// <summary>
+    /// 박스 애니메이션
+    /// </summary>
+    [SerializeField]Animator boxAnimator;
     /// <summary>
     /// 드랍하는 경험치 수치
     /// </summary>
@@ -34,5 +40,10 @@ class Monster : BattleUnit
             player.IncreaseGold(Gold);
             player.IncreaseExp(dropExp);
         }
+    }
+    internal void HitAnimation()
+    {
+        boxAnimator.SetBool("damaged", true);
+        boxAnimator.SetBool("damaged", false);
     }
 }

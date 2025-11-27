@@ -140,3 +140,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 912f1cbcc90637a49b04871c4c468e5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boxAnimator: {fileID: 4229156991348229825}

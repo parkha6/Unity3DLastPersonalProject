@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -100,6 +101,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         User.InputName(DataMan.InputPlayerName());
         UiMan.TypeNameUI(false);
+        User.InitialStatSetting();
         InitialUISetting();
         StartBattle();
     }
@@ -120,29 +122,88 @@ public class GameManager : MonoSingleton<GameManager>
         UiMan.SetAllInfo(User);
         UiMan.StageText(stage.MainStage, stage.SubStage);
     }
+    /// <summary>
+    /// 배틀 시작 함수
+    /// </summary>
     void StartBattle()
     {
         monsterList.StartBattle();
         StartCoroutine(AutoBattle());
     }
+    /// <summary>
+    /// 자동 배틀 함수
+    /// </summary>
+    /// <returns></returns>
     IEnumerator AutoBattle()
     {
-        PlayerTurn();
-        yield return null;
-        MonsterTurn();
-        yield return null;
+        while (!monsterList.CheckAllDead())
+        {
+            PlayerTurn();
+            yield return null;
+            MonsterTurn();
+            yield return null;
+        }
+        if (monsterList.CheckAllDead())
+        {
+            stage.IncreaseStage();
+            UiMan.StageText(stage.MainStage, stage.SubStage);
+            StartBattle();
+        }
+        else if (User.IsDead)
+        { StartBattle(); }
     }
     /// <summary>
-    /// 플레이어 턴
+    /// 플레이어 턴에 몬스터를 팬다.
     /// </summary>
     void PlayerTurn()
     {
+        //몬스터를 지정
+        byte monAmount = monsterList.ReturnAmount();
+        Monster targetMon = monsterList.TakeMonster(Consts.firstMon);
+        byte hitWho = (byte)Random.Range(0, monAmount);
+        if (monAmount == Consts.twoMon)
+        {
+            if (hitWho == Consts.SecondMon || targetMon.IsDead)
+            {
+                targetMon = monsterList.TakeMonster(hitWho);
+                if (targetMon.IsDead)
+                    hitWho = Consts.firstMon;
+                targetMon = monsterList.TakeMonster(hitWho);
+            }
+        }
+        //공격
+        targetMon.GetAttacked(User.Attack());
+        //결과를 UI에 갱신
+        if (monAmount == Consts.minValue)
+        {
+            UiMan.MonsterLeftInfo(targetMon);
+            targetMon.HitAnimation();
+        }
+        else if (monAmount == Consts.twoMon)
+        {
+            if (hitWho == Consts.firstMon)
+            {
+                UiMan.MonsterLeftInfo(targetMon);
+                targetMon.HitAnimation();
+            }
+            else if (hitWho == Consts.SecondMon)
+            {
+                UiMan.MonsterRightInfo(targetMon);
+                targetMon.HitAnimation();
+            }
+        }
+        //죽음체크
+        if (targetMon.IsDead)
+        { targetMon.DropReward(player); }
     }
     /// <summary>
     /// 몬스터 턴
     /// </summary>
     void MonsterTurn()
-    { }
+    {
+        if (monsterList.AllAttack(User))
+        { User.StartAgain(); }
+    }
     /// <summary>
     /// 게임 종료
     /// </summary>

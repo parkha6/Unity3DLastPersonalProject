@@ -491,9 +491,6 @@ MonoBehaviour:
   infoAtkText: {fileID: 5673880371387465214}
   infoDefText: {fileID: 3409055995321817254}
   infoCloseButton: {fileID: 1031410513}
-  leftCube: {fileID: 0}
-  middleCube: {fileID: 0}
-  rightCube: {fileID: 0}
   leftInfo: {fileID: 848570249}
   leftName: {fileID: 1592138473}
   leftLevel: {fileID: 477091994}
@@ -7855,7 +7852,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3146778827823281602, guid: 3d8cb2371da518c47b9d2d3103a9a58c, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 625
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3146778827823281602, guid: 3d8cb2371da518c47b9d2d3103a9a58c, type: 3}
       propertyPath: m_SizeDelta.y
@@ -7891,7 +7888,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3146778827823281602, guid: 3d8cb2371da518c47b9d2d3103a9a58c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 312.5
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3146778827823281602, guid: 3d8cb2371da518c47b9d2d3103a9a58c, type: 3}
       propertyPath: m_AnchoredPosition.y

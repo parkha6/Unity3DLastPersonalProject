@@ -65,4 +65,12 @@ internal class Player : BattleUnit
     { return mp += plusMp; }
     internal void InputName(string inputName)
     { nameIs = inputName; }
+    internal void InitialStatSetting()
+    {
+        Hp = Level * Consts.barStat;
+        Mp = Level * Consts.barStat;
+        exp = Level * Consts.barStat;
+        Atk = Random.Range(Consts.minValue, Consts.maxPlusStat);
+        Def = Random.Range(Consts.minValue, Consts.maxPlusStat);
+    }
 }

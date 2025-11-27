@@ -24,4 +24,24 @@ class Consts
     /// 최고레벨
     /// </summary>
     internal const byte maxLevel = 255;
+    /// <summary>
+    /// 첫번째 박스번호
+    /// </summary>
+    internal const byte firstMon = 0;
+    /// <summary>
+    /// 두번째 박스번호
+    /// </summary>
+    internal const byte SecondMon = 1;
+    /// <summary>
+    /// 몬스터 2마리
+    /// </summary>
+    internal const byte twoMon = 2;
+    /// <summary>
+    /// 스텟이 오를 수 있는 최고수치
+    /// </summary>
+    internal const byte maxPlusStat = 5;
+    /// <summary>
+    /// 체력 마력 경험치 보정용
+    /// </summary>
+    internal const byte barStat = 10;
 }
