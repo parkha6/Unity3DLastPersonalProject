@@ -420,7 +420,7 @@ GameObject:
   - component: {fileID: 180023335}
   - component: {fileID: 180023334}
   m_Layer: 5
-  m_Name: Exit
+  m_Name: ExitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -766,6 +766,7 @@ MonoBehaviour:
   messageUi: {fileID: 2109619948}
   messageText: {fileID: 1986795321}
   countdownText: {fileID: 1378501658}
+  exitButton: {fileID: 180023334}
 --- !u!4 &208087182
 Transform:
   m_ObjectHideFlags: 0
@@ -3568,7 +3569,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1080093495
 Transform:
   m_ObjectHideFlags: 0
@@ -7745,7 +7746,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &917126858541039015
 GameObject:
   m_ObjectHideFlags: 0
