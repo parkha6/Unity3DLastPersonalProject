@@ -17,7 +17,7 @@ public class Stage : MonoBehaviour
             { value = Consts.minValue; }
             else if (value > Consts.maxInt)
             { value = Consts.maxInt; }
-                mainStage = value;
+            mainStage = value;
         }
     }
     /// <summary>
@@ -44,12 +44,37 @@ public class Stage : MonoBehaviour
             }
             else if (value > Consts.maxInt)
             { value = Consts.maxInt; }
-                subStage = value;
+            subStage = value;
         }
     }
     /// <summary>
     /// 스테이지 상승용 함수
     /// </summary>
     internal int IncreaseStage()
-    { return ++SubStage; }
+    {
+        ++SubStage;
+        if (subStage > Consts.minValue || mainStage > Consts.minValue)
+        { UiManager.Instance.SetStageDownButton(true); }
+        return subStage; 
+    }
+    /// <summary>
+    /// 버튼용 스크립트
+    /// </summary>
+    internal void DecreaseStage()
+    {
+        if (subStage > Consts.minValue)
+        { --subStage; }
+        else if (subStage <= Consts.minValue)
+        {
+            if (mainStage > Consts.minValue)
+            {
+                --mainStage;
+                subStage = Consts.endSubStage;
+            }
+
+        }
+        if (mainStage == Consts.minValue && subStage == Consts.minValue)
+        { UiManager.Instance.SetStageDownButton(false); }
+        UiManager.Instance.StageText(MainStage,SubStage);
+    }
 }

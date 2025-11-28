@@ -99,6 +99,11 @@ public class UiManager : MonoSingleton<UiManager>
     /// </summary>
     [Tooltip("스테이지 표시 텍스트")]
     [SerializeField] TMP_Text stageText;
+    /// <summary>
+    /// 스테이지를 내리는 버튼
+    /// </summary>
+    [Tooltip("스테이지를 내리는 버튼")]
+    [SerializeField] Button stageDownButton;
     [Header("사용자 정보 UI")]
     /// <summary>
     /// 사용자 정보 UI 띄우는 버튼
@@ -425,6 +430,15 @@ public class UiManager : MonoSingleton<UiManager>
     internal void StageUI(bool isSet)
     { stageUi.SetActive(isSet); }
     /// <summary>
+    /// 스테이지가 1이상일시 버튼을 보이게 하는 용도
+    /// </summary>
+    /// <param name="isSet"></param>
+    internal void SetStageDownButton(bool isSet)
+    {
+        GameObject downButtonObj = stageDownButton.gameObject;
+        downButtonObj.SetActive(isSet);
+    }
+    /// <summary>
     /// 스테이지 mainStage - subStage로 스테이지 텍스트에 표시
     /// </summary>
     /// <param name="mainStage"></param>
@@ -578,5 +592,6 @@ public class UiManager : MonoSingleton<UiManager>
         atkUp.onClick.AddListener(GameMan.User.SetAtkUp);
         defUp.onClick.AddListener(GameMan.User.SetDefUp);
         exitButton.onClick.AddListener(GameMan.QuitGame);
+        stageDownButton.onClick.AddListener(GameMan.Stage.DecreaseStage);
     }
 }
