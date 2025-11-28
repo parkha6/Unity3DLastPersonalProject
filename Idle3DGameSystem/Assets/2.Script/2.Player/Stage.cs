@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Stage : MonoBehaviour
@@ -18,7 +16,9 @@ public class Stage : MonoBehaviour
         {
             if (value <= Consts.none)
             { value = Consts.minValue; }
-            mainStage = value;
+            else if (value > Consts.maxInt)
+            { value = Consts.maxInt; }
+                mainStage = value;
         }
     }
     /// <summary>
@@ -37,10 +37,15 @@ public class Stage : MonoBehaviour
             { value = Consts.minValue; }
             else if (value >= Consts.endSubStage)
             {
-                ++MainStage;
-                value = Consts.minValue;
+                if (MainStage < Consts.maxInt)
+                {
+                    ++MainStage;
+                    value = Consts.minValue;
+                }
             }
-            subStage = value;
+            else if (value > Consts.maxInt)
+            { value = Consts.maxInt; }
+                subStage = value;
         }
     }
     /// <summary>
