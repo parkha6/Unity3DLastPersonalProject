@@ -1,7 +1,7 @@
 # 방치형 상자 게임
 ![메인화면 스크린 샷](https://github.com/parkha6/Unity3DLastPersonalProject/blob/main/ReadMe/MainScreenShot.jpg?raw=true)  
 * 내일배움캠프 3D 심화 과제용으로 만들었습니다.
-* 이제 저장이 됩니다. 와 신난다.
+* 이제 저장이 됩니다.
 * 스킬도 못 넣어서 Mp는 장식이 되었습니다.
 * 인벤토리도 못 만들었습니다.
   
