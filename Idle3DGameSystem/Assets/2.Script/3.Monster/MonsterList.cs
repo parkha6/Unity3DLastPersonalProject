@@ -200,6 +200,7 @@ public class MonsterList : MonoBehaviour
             foreach (Monster mon in monsters)
             {
                 player.GetAttacked(mon.Attack());
+                DataManager.Instance.SavePlayerData();
                 yield return new WaitForSeconds(Consts.waitingTime);
                 if (player.IsDead)
                 { isStart = false; }

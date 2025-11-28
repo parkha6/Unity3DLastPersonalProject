@@ -47,6 +47,11 @@ public class Stage : MonoBehaviour
             subStage = value;
         }
     }
+    internal void LoadStage(int loadMainStage, int loadSubStage)
+    {
+        MainStage = loadMainStage;
+        SubStage = loadSubStage;
+    }
     /// <summary>
     /// 스테이지 상승용 함수
     /// </summary>

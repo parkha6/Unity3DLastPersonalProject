@@ -175,6 +175,23 @@ class BattleUnit : Object
     /// </summary>
     protected int damage = Consts.minValue;
     /// <summary>
+    /// 가지고 있는 골드 수치
+    /// </summary>
+    int gold = Consts.none;
+    /// <summary>
+    /// 드랍 골드 프로퍼티
+    /// </summary>
+    internal int Gold
+    {
+        get { return gold; }
+        set
+        {
+            if (value <= Consts.none)
+            { value = Consts.none; }
+            gold = value;
+        }
+    }
+    /// <summary>
     /// 죽음 판정
     /// </summary>
     protected bool isDead = false;
@@ -182,6 +199,17 @@ class BattleUnit : Object
     /// 죽음 체크용 프로퍼티
     /// </summary>
     internal bool IsDead { get { return isDead; } }
+    /// <summary>
+    /// 데이터 불러오기용 함수
+    /// </summary>
+    /// <param name="currentHp"></param>
+    /// <param name="currentMp"></param>
+    /// <param name="currentExp"></param>
+    internal void LoadPrivateBarData(int loadHp, int loadMp)
+    {
+        CurrentHp = loadHp;
+        CurrentMp = loadMp;
+    }
     /// <summary>
     /// 공격데미지 계산
     /// </summary>
@@ -262,23 +290,6 @@ class BattleUnit : Object
     /// <returns></returns>
     protected int DamageIncrease(int increaseDmg)
     { return damage += increaseDmg; }
-    /// <summary>
-    /// 가지고 있는 골드 수치
-    /// </summary>
-    int gold = Consts.none;
-    /// <summary>
-    /// 드랍 골드 프로퍼티
-    /// </summary>
-    internal int Gold
-    {
-        get { return gold; }
-        set
-        {
-            if (value <= Consts.none)
-            { value = Consts.none; }
-            gold = value;
-        }
-    }
     /// <summary>
     /// plusGold만큼 골드 값 증가.
     /// </summary>

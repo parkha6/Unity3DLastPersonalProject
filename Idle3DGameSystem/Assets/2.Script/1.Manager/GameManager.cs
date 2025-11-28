@@ -86,7 +86,12 @@ public class GameManager : MonoSingleton<GameManager>
     /// 게임 시작
     /// </summary>
     internal void StartGame()
-    { SetName(); }
+    {
+        if (DataMan.LoadPlayerData())
+            ShowUi();
+        else
+            SetName();
+    }
     /// <summary>
     /// 이름입력을 위한 세팅 함수
     /// </summary>
@@ -100,6 +105,13 @@ public class GameManager : MonoSingleton<GameManager>
         User.InputName(DataMan.InputPlayerName());
         UiMan.TypeNameUI(false);
         User.InitialStatSetting();
+        ShowUi();
+    }
+    /// <summary>
+    /// 시작시 Ui 보여줌
+    /// </summary>
+    void ShowUi()
+    {
         InitialUISetting();
         StartBattle();
     }
@@ -136,6 +148,7 @@ public class GameManager : MonoSingleton<GameManager>
     {
         while (!monsterList.CheckAllDead())
         {
+            DataMan.SavePlayerData();
             PlayerTurn();
             yield return new WaitForSeconds(Consts.waitingTime);
             bool check = MonsterTurn();
@@ -151,6 +164,7 @@ public class GameManager : MonoSingleton<GameManager>
         {
             stage.IncreaseStage();
             UiMan.StageText(stage.MainStage, stage.SubStage);
+            DataMan.SavePlayerData();
             StartBattle();
         }
     }
