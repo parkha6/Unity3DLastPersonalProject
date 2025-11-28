@@ -1,4 +1,3 @@
-using UnityEngine;
 /// <summary>
 /// 매직넘버 방지용 클래스
 /// </summary>

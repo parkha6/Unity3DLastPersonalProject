@@ -1,5 +1,4 @@
 using UnityEngine;
-
 /// <summary>
 /// 인벤토리 관련 클래스
 /// </summary>

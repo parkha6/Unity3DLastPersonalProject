@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-
 /// <summary>
 /// 몬스터 클래스
 /// </summary>

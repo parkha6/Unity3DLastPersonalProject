@@ -1,5 +1,4 @@
 using UnityEngine;
-
 /// <summary>
 /// 싱글턴 패턴 배치용 클래스
 /// </summary>
